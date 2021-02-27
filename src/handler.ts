@@ -1,19 +1,25 @@
-import { bot } from './bot'
-import { APIGatewayProxyEvent } from 'aws-lambda'
+import { APIGatewayProxyEvent } from "aws-lambda";
+import { Update } from "node-telegram-bot-api";
+import { telegram } from "./telegram";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
-    const body = JSON.parse(event.body)
+  try {
+    if (event.body) {
+      const { message } = JSON.parse(event.body) as Update;
 
-    console.log(body) // Логируем body
+      if (message) {
+        const { chat, text } = message;
 
-    if( body && body.message ) {
-        const {chat, text} = body.message
-
-        await bot.sendMessage({chat_id: chat.id, text: `Твоє повідомлення: ${text}`})
+        await telegram.sendMessage({
+          chat_id: chat.id,
+          text: `${text}`,
+        });
+      }
     }
+  } catch (error) {
+    console.log(error);
+  }
 
-    return {statusCode: 200}
-}
-
-
-export { webhook }
+  return { statusCode: 200 };
+};
+export { webhook };

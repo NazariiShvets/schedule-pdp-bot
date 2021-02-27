@@ -6,7 +6,7 @@
   "scripts": {
     "local": "sls offline start",
     "deploy": "sls deploy",
-    "logs": "sls logs --function processWebhook -t"
+    "logs": "sls logs --function webhook -t"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/NazariiShvets/schedule-pdp-bot#readme",
   "dependencies": {
+    "@types/node-telegram-bot-api": "^0.51.1",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "pg": "^8.5.1",
@@ -28,6 +29,16 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.72",
     "@types/node": "^14.14.31",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "eslint": "7.19.0",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-config-airbnb-typescript": "12.0.0",
+    "eslint-config-prettier": "7.2.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-prettier": "3.3.1",
+    "eslint-plugin-security-node": "1.0.14",
+    "prettier": "2.2.1",
     "serverless": "^2.27.1",
     "serverless-dotenv-plugin": "^3.8.1",
     "serverless-offline": "^6.8.0",

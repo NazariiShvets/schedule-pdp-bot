@@ -1,17 +1,17 @@
+service: schedule-pdp-bot
+
 plugins:
   - serverless-plugin-typescript
   - serverless-dotenv-plugin
   - serverless-offline
-
-service: schedule-pdp-bot
 
 frameworkVersion: '2'
 
 provider:
   name: aws
   runtime: nodejs14.x
-  lambdaHashingVersion: 20201221
   region: eu-central-1
+  lambdaHashingVersion: 20201221
   environment:
     TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
 
@@ -24,4 +24,3 @@ functions:
           method: post
 
 useDotenv : true
-

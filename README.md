@@ -1,2 +1,2 @@
-# schedule-pdp-bot
-Schedule telegram bot for pdp
+# schedule-pdp-telegram
+Schedule telegram telegram for pdp
