@@ -1,22 +1,21 @@
 import { IUser, UserController } from "../../../db";
-import { STATES } from "../../types";
-import {
-  scheduleDayKeyboard,
-  schedulePairKeyboard,
-} from "../../keyboards/shedule.keyboard";
+import { PAIRS, STATES } from "../../types";
+import { schedulePairKeyboard } from "../../keyboards/shedule.keyboard";
 import { errorKeyboard } from "../../keyboards/error.keyboard";
 import { startHandler } from "../start.handler";
 import { defaultHandler } from "../default.handler";
 import { TelegramAPI } from "../../../api";
+import { enumValuesToArray } from "../../../utils";
 
 const scheduleDayHandler = async (chatId: number, user: IUser, text = "") => {
   try {
     switch (true) {
-      case scheduleDayKeyboard[0][0].text.includes(text): {
+      case enumValuesToArray(PAIRS).includes(text): {
         await UserController.updateUser(user.telegramId, {
           state: {
             state: STATES.SCHEDULE_DAY_EDIT,
             day: user.state.day,
+            pair: enumValuesToArray(PAIRS).find((pair) => pair === text),
           },
         });
 

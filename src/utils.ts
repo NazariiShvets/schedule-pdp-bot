@@ -1,5 +1,5 @@
 import { IUser, IUserModel, User } from "./db";
-import { DAYS, NUMERATOR_INTERVAL } from "./telegram/types";
+import { DAYS } from "./telegram/types";
 
 const covertModelFromDbToIModelFromDb = <T, K>(model: T): K =>
   (model as any).dataValues as K;
@@ -12,13 +12,19 @@ const convertUserToIUser = (user: User): IUser => {
   };
 };
 
-const enumToArray = (enums: any) =>
-  Object.keys(enums).map((key: string) => enums[key]);
+const enumValuesToArray = (someEnum: any) =>
+  Object.keys(someEnum).map((key) => someEnum[key]);
 
-const getCurrentDay = () => enumToArray(DAYS)[new Date().getDay()];
+const enumKeysToArray = (someEnum: any) =>
+  Object.keys(someEnum)
+    .filter((value) => !Number.isNaN(Number(value)))
+    .map((key) => someEnum[key]);
+
+const getCurrentDay = () => enumValuesToArray(DAYS)[new Date().getDay()];
 
 export {
-  enumToArray,
+  enumValuesToArray,
+  enumKeysToArray,
   convertUserToIUser,
   covertModelFromDbToIModelFromDb,
   getCurrentDay,

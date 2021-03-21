@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { db } from "../db";
+import { DAYS, PAIRS, STATES } from "../../telegram/types";
 
 type IUser = {
   id?: number;
@@ -11,7 +12,7 @@ type IUser = {
 
 type IUserModel = Omit<IUser, "state"> & { state: string };
 
-type IState = { state: string; day?: string; isOddWeek?: boolean };
+type IState = { state: STATES; day?: DAYS; pair?: PAIRS; isOddWeek?: boolean };
 
 class User extends Model<IUserModel> {}
 

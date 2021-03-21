@@ -1,4 +1,4 @@
-import { TelegramKeyboardMarkup } from "../../api";
+import { TelegramKeyboardButton, TelegramKeyboardMarkup } from "../../api";
 
 export const scheduleKeyboard: TelegramKeyboardMarkup = [
   [{ text: "Розклад на сьогодні" }],
@@ -18,7 +18,7 @@ export const scheduleDayKeyboard: TelegramKeyboardMarkup = [
   [{ text: "Повернутися в головне меню" }],
 ];
 
-export const schedulePairKeyboard: TelegramKeyboardMarkup = [
+export const schedulePairKeyboard: TelegramKeyboardButton[][] = [
   [{ text: "Перша пара" }, { text: "Друга пара" }],
   [{ text: "Третя пара" }, { text: "Четверта пара" }],
   [{ text: "П'ята пара" }, { text: "Шоста пара" }],
