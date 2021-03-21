@@ -9,15 +9,19 @@ frameworkVersion: '2'
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs12.x
   region: eu-central-1
   lambdaHashingVersion: 20201221
   environment:
     TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
+    DB_NAME: ${env:DB_NAME}
+    DB_USER: ${env:DB_USER}
+    DB_PASSWORD: ${env:DB_PASSWORD}
+    DB_ENDPOINT: ${env:DB_ENDPOINT}
 
 functions:
   webhook:
-    handler: src/handler.webhook
+    handler: src/telegram/webhook.webhook
     events:
       - http:
           path: /
