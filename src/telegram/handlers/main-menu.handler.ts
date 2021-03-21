@@ -59,8 +59,21 @@ const mainMenuHandler = async (
         });
       }
     }
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.log(error);
+
+    await UserController.updateUser(telegramId, {
+      state: { state: STATES.START },
+    });
+
+    await TelegramAPI.sendMessage(chatId, {
+      text: "Щось пішло не так, повернемось в головне меню",
+      reply_markup: {
+        keyboard: errorKeyboard,
+        one_time_keyboard: true,
+        resize_keyboard: true,
+      },
+    });
   }
 };
 

@@ -15,7 +15,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
     await db.sync({ force: false });
 
     if (event.body) {
-      const { message } = JSON.parse(event.body) as TelegramBody;
+      const { message }: TelegramBody = JSON.parse(event.body);
 
       if (message) {
         const { chat, from, text } = message;
@@ -45,6 +45,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
 
             break;
           }
+
           default:
             await defaultHandler(chat.id, user);
         }

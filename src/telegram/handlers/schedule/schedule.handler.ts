@@ -52,6 +52,7 @@ const scheduleHandler = async (chatId: number, user: IUser, text = "") => {
         await UserController.updateUser(user.telegramId, {
           state: { state: STATES.SCHEDULE_WEEK },
         });
+
         await TelegramAPI.sendMessage(chatId, {
           text: "Вибери день",
 
@@ -61,8 +62,10 @@ const scheduleHandler = async (chatId: number, user: IUser, text = "") => {
             resize_keyboard: true,
           },
         });
+
         return;
       }
+
       default: {
         await UserController.updateUser(user.telegramId, {
           state: { state: STATES.START },
@@ -78,8 +81,9 @@ const scheduleHandler = async (chatId: number, user: IUser, text = "") => {
         });
       }
     }
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
+
     await UserController.updateUser(user.telegramId, {
       state: { state: STATES.START },
     });

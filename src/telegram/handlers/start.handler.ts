@@ -29,6 +29,7 @@ const startHandler = async (
 
         break;
       }
+
       default: {
         await TelegramAPI.sendMessage(chatId, {
           text: "Щось пішло не так, давай попробуєм знову",
@@ -40,8 +41,17 @@ const startHandler = async (
         });
       }
     }
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.log(error);
+
+    await TelegramAPI.sendMessage(chatId, {
+      text: "Щось пішло не так, давай попробуєм знову",
+      reply_markup: {
+        keyboard: errorKeyboard,
+        one_time_keyboard: true,
+        resize_keyboard: true,
+      },
+    });
   }
 };
 
