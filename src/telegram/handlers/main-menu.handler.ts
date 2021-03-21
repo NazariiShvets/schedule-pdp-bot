@@ -4,16 +4,13 @@ import { mainMenuKeyboard } from "../keyboards/main-menu.keyboard";
 import { STATES } from "../types";
 import { scheduleKeyboard } from "../keyboards/shedule.keyboard";
 import { errorKeyboard } from "../keyboards/error.keyboard";
+import { defaultHandler } from "./default.handler";
 
-const mainMenuHandler = async (
-  chatId: number,
-  { telegramId }: IUser,
-  text = ""
-) => {
+const mainMenuHandler = async (chatId: number, user: IUser, text = "") => {
   try {
     switch (true) {
       case mainMenuKeyboard[0][0].text.includes(text): {
-        await UserController.updateUser(telegramId, {
+        await UserController.updateUser(user.telegramId, {
           state: { state: STATES.SCHEDULE },
         });
 
@@ -30,7 +27,7 @@ const mainMenuHandler = async (
       }
 
       case mainMenuKeyboard[1][0].text.includes(text): {
-        await UserController.updateUser(telegramId, {
+        await UserController.updateUser(user.telegramId, {
           state: { state: STATES.START },
         });
 
@@ -45,35 +42,13 @@ const mainMenuHandler = async (
         break;
       }
       default: {
-        await UserController.updateUser(telegramId, {
-          state: { state: STATES.START },
-        });
-
-        await TelegramAPI.sendMessage(chatId, {
-          text: "Щось пішло не так, давай попробуєм знову",
-          reply_markup: {
-            keyboard: errorKeyboard,
-            one_time_keyboard: true,
-            resize_keyboard: true,
-          },
-        });
+        await defaultHandler(chatId, user);
       }
     }
   } catch (error) {
     console.log(error);
 
-    await UserController.updateUser(telegramId, {
-      state: { state: STATES.START },
-    });
-
-    await TelegramAPI.sendMessage(chatId, {
-      text: "Щось пішло не так, повернемось в головне меню",
-      reply_markup: {
-        keyboard: errorKeyboard,
-        one_time_keyboard: true,
-        resize_keyboard: true,
-      },
-    });
+    await defaultHandler(chatId, user);
   }
 };
 

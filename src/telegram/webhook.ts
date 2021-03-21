@@ -9,6 +9,7 @@ import {
 import { TelegramBody } from "../api";
 import { db, UserController } from "../db";
 import { STATES } from "./types";
+import { scheduleDayHandler } from "./handlers/schedule/schedule-day.handler";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
   try {
@@ -42,6 +43,12 @@ const webhook = async (event: APIGatewayProxyEvent) => {
 
           case STATES.SCHEDULE: {
             await scheduleHandler(chat.id, user, text);
+
+            break;
+          }
+
+          case STATES.SCHEDULE_DAY: {
+            await scheduleDayHandler(chat.id, user, text);
 
             break;
           }

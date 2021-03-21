@@ -7,6 +7,8 @@ import {
 } from "../../keyboards/shedule.keyboard";
 import { errorKeyboard } from "../../keyboards/error.keyboard";
 import { getCurrentDay } from "../../../utils";
+import { startHandler } from "../start.handler";
+import { defaultHandler } from "../default.handler";
 
 const scheduleHandler = async (chatId: number, user: IUser, text = "") => {
   try {
@@ -66,36 +68,20 @@ const scheduleHandler = async (chatId: number, user: IUser, text = "") => {
         return;
       }
 
-      default: {
-        await UserController.updateUser(user.telegramId, {
-          state: { state: STATES.START },
-        });
+      case errorKeyboard[0][0].text.includes(text): {
+        await startHandler(chatId, user, text);
 
-        await TelegramAPI.sendMessage(chatId, {
-          text: "Щось пішло не так, повернемось в головне меню",
-          reply_markup: {
-            keyboard: errorKeyboard,
-            one_time_keyboard: true,
-            resize_keyboard: true,
-          },
-        });
+        break;
+      }
+
+      default: {
+        await defaultHandler(chatId, user);
       }
     }
   } catch (error) {
     console.log(error);
 
-    await UserController.updateUser(user.telegramId, {
-      state: { state: STATES.START },
-    });
-
-    await TelegramAPI.sendMessage(chatId, {
-      text: "Щось пішло не так, повернемось в головне меню",
-      reply_markup: {
-        keyboard: errorKeyboard,
-        one_time_keyboard: true,
-        resize_keyboard: true,
-      },
-    });
+    await defaultHandler(chatId, user);
   }
 };
 

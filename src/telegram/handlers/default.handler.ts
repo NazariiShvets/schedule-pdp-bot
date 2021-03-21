@@ -3,7 +3,10 @@ import { errorKeyboard } from "../keyboards/error.keyboard";
 import { IUser, UserController } from "../../db";
 import { STATES } from "../types";
 
-const defaultHandler = async (chatId: number, { telegramId }: IUser) => {
+const defaultHandler = async (
+  chatId: number,
+  { telegramId }: Pick<IUser, "telegramId">
+) => {
   await UserController.updateUser(telegramId, {
     state: { state: STATES.START },
   });
