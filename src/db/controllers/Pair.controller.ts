@@ -1,11 +1,11 @@
 import { IPair, Pair } from "../models";
 
 class PairController {
-  static createPair = async (data: IPair): Promise<[Pair, boolean] | null> => {
+  static createPair = async (data: IPair): Promise<IPair | null> => {
     try {
-      return await Pair.findOrCreate({
-        where: data,
-      });
+      const pair = await Pair.create(data);
+
+      return (pair as any).dataValues as IPair;
     } catch (error) {
       console.log(error);
 
@@ -15,9 +15,11 @@ class PairController {
 
   static getAllPairs = async (
     filter: Partial<IPair>
-  ): Promise<Pair[] | null> => {
+  ): Promise<IPair[] | null> => {
     try {
-      return await Pair.findAll({ where: filter });
+      const pairs = await Pair.findAll({ where: filter });
+
+      return pairs.map((pair) => (pair as any).dataValues as IPair);
     } catch (error) {
       console.log(error);
 
@@ -25,9 +27,11 @@ class PairController {
     }
   };
 
-  static getPair = async (filter: Partial<IPair>): Promise<Pair | null> => {
+  static getPair = async (filter: Partial<IPair>): Promise<IPair | null> => {
     try {
-      return await Pair.findOne({ where: filter });
+      const pair = await Pair.findOne({ where: filter });
+
+      return (pair as any).dataValues as IPair;
     } catch (error) {
       console.log(error);
 
@@ -37,10 +41,12 @@ class PairController {
 
   static updatePair = async (
     id: number,
-    newTeacherData: Partial<IPair>
-  ): Promise<[number, Pair[]] | null> => {
+    updateData: Partial<IPair>
+  ): Promise<IPair | null> => {
     try {
-      return await Pair.update(newTeacherData, { where: { id } });
+      const updatedPair = await Pair.update(updateData, { where: { id } });
+
+      return (updatedPair[1] as any).dataValues as IPair;
     } catch (error) {
       console.log(error);
 
@@ -48,10 +54,10 @@ class PairController {
     }
   };
 
-  static deletePair = async (newData: IPair): Promise<number | null> => {
+  static deletePair = async (filter: IPair): Promise<number | null> => {
     try {
       return await Pair.destroy({
-        where: { ...newData },
+        where: filter,
       });
     } catch (error) {
       console.log(error);

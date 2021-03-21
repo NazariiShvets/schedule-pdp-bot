@@ -1,22 +1,37 @@
 import { DataTypes, Model } from "sequelize";
 import { db } from "../db";
 
-interface IUser {
+type IUser = {
   id?: number;
   telegramId: number;
   firstName: string;
-  lastName: string;
-}
+  lastName?: string;
+  state: IState;
+};
 
-class User extends Model<IUser> {}
+type IUserModel = Omit<IUser, "state"> & { state: string };
+
+type IState = { state: string; day?: string; isOddWeek?: boolean };
+
+class User extends Model<IUserModel> {}
 
 User.init(
   {
-    telegramId: DataTypes.NUMBER,
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+    firstName: {
+      type: DataTypes.STRING,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    telegramId: {
+      type: DataTypes.INTEGER,
+    },
+    state: {
+      type: DataTypes.STRING,
+    },
   },
   { sequelize: db, modelName: "User", tableName: "users" }
 );
 
-export { User, IUser };
+export { User, IUser, IState, IUserModel };

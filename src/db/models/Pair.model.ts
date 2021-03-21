@@ -1,19 +1,19 @@
 import { DataTypes, Model } from "sequelize";
 import { db } from "../db";
-import { Teacher } from "./Teacher.model";
-import { Classroom } from "./Classroom.model";
 import { PairType } from "../types";
+import { User } from "./User.model";
 
 interface IPair {
-  id?: number;
+  id: number;
   subject: string;
-  teacher_id: number;
-  classroom_id: number;
+  teacher: string;
+  classroom: string;
   day: string;
   from: string;
   to: string;
   type: PairType;
   isOnline: boolean;
+  user_id: number;
   url?: string;
 }
 
@@ -21,7 +21,20 @@ class Pair extends Model<IPair> {}
 
 Pair.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     subject: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    teacher: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    classroom: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -46,18 +59,13 @@ Pair.init(
       allowNull: false,
     },
     url: DataTypes.STRING,
-    teacher_id: {
-      type: DataTypes.NUMBER,
+
+    user_id: {
+      type: DataTypes.INTEGER,
       references: {
         // @ts-ignore
-        model: Teacher,
-      },
-    },
-    classroom_id: {
-      type: DataTypes.NUMBER,
-      references: {
-        // @ts-ignore
-        model: Classroom,
+        model: User,
+        key: "id",
       },
     },
   },

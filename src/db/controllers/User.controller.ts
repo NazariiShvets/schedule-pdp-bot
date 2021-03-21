@@ -1,11 +1,27 @@
 import { IUser, User } from "../models";
+import { convertUserToIUser } from "../../utils";
 
 class UserController {
-  static createUser = async (data: IUser): Promise<[User, boolean] | null> => {
+  static createUser = async (userData: IUser): Promise<IUser | null> => {
     try {
-      return await User.findOrCreate({
-        where: data,
+      const user = await User.create({
+        ...userData,
+        state: JSON.stringify(userData.state),
       });
+
+      return convertUserToIUser(user);
+    } catch (e) {
+      console.log(e);
+
+      return null;
+    }
+  };
+
+  static getAllUsers = async (filter: Partial<IUser>) => {
+    try {
+      const users = await User.findAll({ where: filter });
+
+      return users.map(convertUserToIUser);
     } catch (error) {
       console.log(error);
 
@@ -13,21 +29,15 @@ class UserController {
     }
   };
 
-  static getAllUsers = async (
-    filter: Partial<IUser>
-  ): Promise<User[] | null> => {
+  static getUser = async (telegramId: number): Promise<IUser | null> => {
     try {
-      return await User.findAll({ where: filter });
-    } catch (error) {
-      console.log(error);
+      const user = await User.findOne({ where: { telegramId } });
 
-      return null;
-    }
-  };
+      if (!user) {
+        return null;
+      }
 
-  static getUser = async (filter: Partial<IUser>): Promise<User | null> => {
-    try {
-      return await User.findOne({ where: filter });
+      return convertUserToIUser(user);
     } catch (error) {
       console.log(error);
 
@@ -36,27 +46,18 @@ class UserController {
   };
 
   static updateUser = async (
-    id: number,
-    data: Partial<IUser>
-  ): Promise<[number, User[]] | null> => {
+    telegramId: number,
+    data: Partial<Omit<IUser, "telegramId">>
+  ): Promise<void> => {
     try {
-      return await User.update(data, { where: { id } });
+      await User.update(
+        { ...data, state: JSON.stringify(data.state) },
+        {
+          where: { telegramId },
+        }
+      );
     } catch (error) {
       console.log(error);
-
-      return null;
-    }
-  };
-
-  static deleteUser = async (data: IUser): Promise<number | null> => {
-    try {
-      return await User.destroy({
-        where: { ...data },
-      });
-    } catch (error) {
-      console.log(error);
-
-      return null;
     }
   };
 }
