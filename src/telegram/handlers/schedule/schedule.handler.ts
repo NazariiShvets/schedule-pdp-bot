@@ -2,6 +2,7 @@ import { IUser, PairController, UserController } from "../../../db";
 import { TelegramAPI } from "../../../api";
 import { STATES } from "../../types";
 import {
+  scheduleDayKeyboard,
   scheduleKeyboard,
   scheduleWeekKeyboard,
 } from "../../keyboards/shedule.keyboard";
@@ -33,7 +34,7 @@ const scheduleHandler = async (chatId: number, user: IUser, text = "") => {
             ? pairs
                 .map(
                   (pair) =>
-                    `${pair.subject}: ${pair.from}-${pair.to}, ${pair.type}, ${
+                    `${pair.subject}: ${pair.time}, ${pair.type}, ${
                       pair.teacher
                     }, ${pair.isOnline ? pair.url : pair.classroom}\n`
                 )
@@ -41,7 +42,7 @@ const scheduleHandler = async (chatId: number, user: IUser, text = "") => {
             : `Список пар пустий`,
           parse_mode: "HTML",
           reply_markup: {
-            keyboard: [[{ text: "Редагувати" }], ...errorKeyboard],
+            keyboard: scheduleDayKeyboard,
             one_time_keyboard: true,
             resize_keyboard: true,
           },
@@ -59,7 +60,7 @@ const scheduleHandler = async (chatId: number, user: IUser, text = "") => {
           text: "Вибери день",
 
           reply_markup: {
-            inline_keyboard: scheduleWeekKeyboard,
+            keyboard: scheduleWeekKeyboard,
             one_time_keyboard: true,
             resize_keyboard: true,
           },

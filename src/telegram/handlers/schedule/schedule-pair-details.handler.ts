@@ -4,31 +4,27 @@ import { schedulePairKeyboard } from "../../keyboards/shedule.keyboard";
 import { errorKeyboard } from "../../keyboards/error.keyboard";
 import { startHandler } from "../start.handler";
 import { defaultHandler } from "../default.handler";
-import { TelegramAPI } from "../../../api";
 import { enumValuesToArray } from "../../../utils";
+import { TelegramAPI } from "../../../api";
 
-const scheduleDayEditPairHandler = async (
+const scheduleDayEditPairDetailsHandler = async (
   chatId: number,
   user: IUser,
   text = ""
 ) => {
   try {
     switch (true) {
-      case enumValuesToArray(PAIR_EDIT_ACTIONS).includes(text): {
-        await UserController.updateUser(user.telegramId, {
-          state: {
-            ...user.state,
-            state: STATES.SCHEDULE_DAY_EDIT_PAIR_DETAILS,
-            pairEditAction: enumValuesToArray(PAIR_EDIT_ACTIONS).find(
-              (action) => action === text
-            ),
-          },
+      case enumValuesToArray(PAIR_EDIT_ACTIONS).includes(
+        user.state.pairEditAction
+      ): {
+        const pair = await PairController.getPair({
+          day: user.state.day,
+          time: user.state.pair,
         });
 
-        if (text === PAIR_EDIT_ACTIONS.DELETE) {
-          await PairController.deletePair({
-            day: user.state.day,
-            time: user.state.pair,
+        if (pair) {
+          await PairController.updatePair(pair.id, {
+            [user.state.pairEditAction!.toLowerCase()]: text,
           });
 
           await UserController.updateUser(user.telegramId, {
@@ -39,7 +35,7 @@ const scheduleDayEditPairHandler = async (
           });
 
           await TelegramAPI.sendMessage(chatId, {
-            text: pairActionsToMessage[text],
+            text: pairActionsToMessage[user.state.pairEditAction!],
             reply_markup: {
               keyboard: schedulePairKeyboard,
               one_time_keyboard: true,
@@ -50,9 +46,7 @@ const scheduleDayEditPairHandler = async (
           return;
         }
 
-        await TelegramAPI.sendMessage(chatId, {
-          text: pairActionsToMessage[text as PAIR_EDIT_ACTIONS],
-        });
+        await defaultHandler(chatId, user);
 
         break;
       }
@@ -74,4 +68,4 @@ const scheduleDayEditPairHandler = async (
   }
 };
 
-export { scheduleDayEditPairHandler };
+export { scheduleDayEditPairDetailsHandler };

@@ -54,7 +54,9 @@ class PairController {
     }
   };
 
-  static deletePair = async (filter: IPair): Promise<number | null> => {
+  static deletePair = async (
+    filter: Partial<IPair>
+  ): Promise<number | null> => {
     try {
       return await Pair.destroy({
         where: filter,

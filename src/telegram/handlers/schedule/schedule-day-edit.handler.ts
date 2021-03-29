@@ -1,29 +1,33 @@
 import { IUser, UserController } from "../../../db";
-import { STATES } from "../../types";
-import {
-  scheduleDayKeyboard,
-  schedulePairKeyboard,
-} from "../../keyboards/shedule.keyboard";
+import { PAIRS_TIME, STATES } from "../../types";
 import { errorKeyboard } from "../../keyboards/error.keyboard";
 import { startHandler } from "../start.handler";
 import { defaultHandler } from "../default.handler";
 import { TelegramAPI } from "../../../api";
+import { enumValuesToArray } from "../../../utils";
+import { schedulePairEditKeyboard } from "../../keyboards/shedule.keyboard";
 
-const scheduleDayHandler = async (chatId: number, user: IUser, text = "") => {
+const scheduleDayEditHandler = async (
+  chatId: number,
+  user: IUser,
+  text = ""
+) => {
   try {
     switch (true) {
-      case scheduleDayKeyboard[0][0].text.includes(text): {
+      case enumValuesToArray(PAIRS_TIME).includes(text): {
         await UserController.updateUser(user.telegramId, {
           state: {
-            state: STATES.SCHEDULE_DAY_EDIT,
+            state: STATES.SCHEDULE_DAY_EDIT_PAIR,
             day: user.state.day,
+            pair: enumValuesToArray(PAIRS_TIME).find((pair) => pair === text),
           },
         });
 
         await TelegramAPI.sendMessage(chatId, {
-          text: "Вибери пару",
+          text: "Вибери що саме хочеш відредагувати",
+
           reply_markup: {
-            keyboard: schedulePairKeyboard,
+            keyboard: schedulePairEditKeyboard,
             one_time_keyboard: true,
             resize_keyboard: true,
           },
@@ -49,4 +53,4 @@ const scheduleDayHandler = async (chatId: number, user: IUser, text = "") => {
   }
 };
 
-export { scheduleDayHandler };
+export { scheduleDayEditHandler };

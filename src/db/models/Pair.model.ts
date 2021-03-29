@@ -9,8 +9,7 @@ interface IPair {
   teacher: string;
   classroom: string;
   day: string;
-  from: string;
-  to: string;
+  time: string;
   type: PairType;
   isOnline: boolean;
   user_id: number;
@@ -42,12 +41,8 @@ Pair.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    from: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    to: {
-      type: DataTypes.DATE,
+    time: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     type: {

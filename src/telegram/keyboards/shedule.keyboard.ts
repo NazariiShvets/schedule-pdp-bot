@@ -6,10 +6,8 @@ export const scheduleKeyboard: TelegramKeyboardMarkup = [
 ];
 
 export const scheduleWeekKeyboard: TelegramKeyboardMarkup = [
-  [{ text: "Понеділок" }],
-  [{ text: "Вівторок" }],
-  [{ text: "Середа" }],
-  [{ text: "Четвер" }],
+  [{ text: "Понеділок" }, { text: "Вівторок" }],
+  [{ text: "Середа" }, { text: "Четвер" }],
   [{ text: "П'ятниця" }],
 ];
 
