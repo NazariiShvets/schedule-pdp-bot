@@ -1,5 +1,5 @@
 import { IUser, PairController, UserController } from "../../../db";
-import { PAIR_EDIT_ACTIONS, STATES, pairActionsToMessage } from "../../types";
+import { PAIR_EDIT_ACTIONS, STATES } from "../../types";
 import { schedulePairKeyboard } from "../../keyboards/shedule.keyboard";
 import { errorKeyboard } from "../../keyboards/error.keyboard";
 import { startHandler } from "../start.handler";
@@ -35,7 +35,7 @@ const scheduleDayEditPairDetailsHandler = async (
           });
 
           await TelegramAPI.sendMessage(chatId, {
-            text: pairActionsToMessage[user.state.pairEditAction!],
+            text: "",
             reply_markup: {
               keyboard: schedulePairKeyboard,
               one_time_keyboard: true,

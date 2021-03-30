@@ -33,11 +33,4 @@ enum PAIR_EDIT_ACTIONS {
   DELETE = "Удалити пару",
 }
 
-const pairActionsToMessage = {
-  [PAIR_EDIT_ACTIONS.NAME]: "Введи нову назву",
-  [PAIR_EDIT_ACTIONS.TEACHER]: "Введи нового викладача",
-  [PAIR_EDIT_ACTIONS.CLASSROOM]: "Введи нову аудиторію",
-  [PAIR_EDIT_ACTIONS.DELETE]: "Тепер у тебе немає пари)",
-};
-
-export { STATES, DAYS, PAIRS_TIME, PAIR_EDIT_ACTIONS, pairActionsToMessage };
+export { STATES, DAYS, PAIRS_TIME, PAIR_EDIT_ACTIONS };

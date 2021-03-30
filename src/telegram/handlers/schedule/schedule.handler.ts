@@ -2,7 +2,8 @@ import { IUser, PairController, UserController } from "../../../db";
 import { TelegramAPI } from "../../../api";
 import { STATES } from "../../types";
 import {
-  scheduleDayKeyboard,
+  scheduleDayKeyboardCreate,
+  scheduleDayKeyboardEdit,
   scheduleKeyboard,
   scheduleWeekKeyboard,
 } from "../../keyboards/shedule.keyboard";
@@ -42,7 +43,9 @@ const scheduleHandler = async (chatId: number, user: IUser, text = "") => {
             : `Список пар пустий`,
           parse_mode: "HTML",
           reply_markup: {
-            keyboard: scheduleDayKeyboard,
+            keyboard: pairs?.length
+              ? scheduleDayKeyboardEdit
+              : scheduleDayKeyboardCreate,
             one_time_keyboard: true,
             resize_keyboard: true,
           },

@@ -11,8 +11,13 @@ export const scheduleWeekKeyboard: TelegramKeyboardMarkup = [
   [{ text: "П'ятниця" }],
 ];
 
-export const scheduleDayKeyboard: TelegramKeyboardMarkup = [
+export const scheduleDayKeyboardEdit: TelegramKeyboardMarkup = [
   [{ text: "Редагувати" }],
+  [{ text: "Повернутися в головне меню" }],
+];
+
+export const scheduleDayKeyboardCreate: TelegramKeyboardMarkup = [
+  [{ text: "Добавити пару" }],
   [{ text: "Повернутися в головне меню" }],
 ];
 

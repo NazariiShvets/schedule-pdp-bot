@@ -1,6 +1,6 @@
 import { IUser, PairController, UserController } from "../../../db";
-import { PAIR_EDIT_ACTIONS, STATES, pairActionsToMessage } from "../../types";
-import { schedulePairKeyboard } from "../../keyboards/shedule.keyboard";
+import { PAIR_EDIT_ACTIONS, STATES } from "../../types";
+import { scheduleDayKeyboardEdit } from "../../keyboards/shedule.keyboard";
 import { errorKeyboard } from "../../keyboards/error.keyboard";
 import { startHandler } from "../start.handler";
 import { defaultHandler } from "../default.handler";
@@ -25,36 +25,57 @@ const scheduleDayEditPairHandler = async (
           },
         });
 
-        if (text === PAIR_EDIT_ACTIONS.DELETE) {
-          await PairController.deletePair({
-            day: user.state.day,
-            time: user.state.pair,
-          });
+        switch (user.state.pairEditAction) {
+          case PAIR_EDIT_ACTIONS.NAME: {
+            await TelegramAPI.sendMessage(chatId, {
+              text: "Введи нову назву",
+            });
 
-          await UserController.updateUser(user.telegramId, {
-            state: {
-              state: STATES.SCHEDULE_DAY_EDIT,
+            break;
+          }
+          case PAIR_EDIT_ACTIONS.TEACHER: {
+            await TelegramAPI.sendMessage(chatId, {
+              text: "Введи нового викладача",
+            });
+
+            break;
+          }
+          case PAIR_EDIT_ACTIONS.CLASSROOM: {
+            await TelegramAPI.sendMessage(chatId, {
+              text: "Введи нову аудиторію",
+            });
+
+            break;
+          }
+          case PAIR_EDIT_ACTIONS.DELETE: {
+            await PairController.deletePair({
               day: user.state.day,
-            },
-          });
+              time: user.state.pair,
+            });
 
-          await TelegramAPI.sendMessage(chatId, {
-            text: pairActionsToMessage[text],
-            reply_markup: {
-              keyboard: schedulePairKeyboard,
-              one_time_keyboard: true,
-              resize_keyboard: true,
-            },
-          });
+            await UserController.updateUser(user.telegramId, {
+              state: {
+                state: STATES.SCHEDULE_DAY_EDIT,
+                day: user.state.day,
+              },
+            });
 
-          return;
+            await TelegramAPI.sendMessage(chatId, {
+              text: "Тепер у тебе немає пари)",
+              reply_markup: {
+                keyboard: scheduleDayKeyboardEdit,
+                one_time_keyboard: true,
+                resize_keyboard: true,
+              },
+            });
+
+            break;
+          }
+
+          default: {
+            break;
+          }
         }
-
-        await TelegramAPI.sendMessage(chatId, {
-          text: pairActionsToMessage[text as PAIR_EDIT_ACTIONS],
-        });
-
-        break;
       }
 
       case errorKeyboard[0][0].text.includes(text): {
