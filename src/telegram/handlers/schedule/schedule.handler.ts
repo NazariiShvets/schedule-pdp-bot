@@ -1,16 +1,16 @@
 import { IUser, PairController, UserController } from "../../../db";
 import { TelegramAPI } from "../../../api";
 import { STATES } from "../../types";
-import {
-  scheduleDayKeyboardCreate,
-  scheduleDayKeyboardEdit,
-  scheduleKeyboard,
-  scheduleWeekKeyboard,
-} from "../../keyboards/shedule.keyboard";
-import { errorKeyboard } from "../../keyboards/error.keyboard";
 import { getCurrentDay } from "../../../utils";
 import { startHandler } from "../start.handler";
 import { defaultHandler } from "../default.handler";
+import {
+  errorKeyboard,
+  pairListCreateKeyboard,
+  pairListEditKeyboard,
+  scheduleKeyboard,
+  scheduleWeekKeyboard,
+} from "../../keyboards";
 
 const scheduleHandler = async (chatId: number, user: IUser, text = "") => {
   try {
@@ -44,8 +44,8 @@ const scheduleHandler = async (chatId: number, user: IUser, text = "") => {
           parse_mode: "HTML",
           reply_markup: {
             keyboard: pairs?.length
-              ? scheduleDayKeyboardEdit
-              : scheduleDayKeyboardCreate,
+              ? pairListEditKeyboard
+              : pairListCreateKeyboard,
             one_time_keyboard: true,
             resize_keyboard: true,
           },

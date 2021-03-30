@@ -1,15 +1,13 @@
 import { IUser, UserController } from "../../db";
-import { startKeyboard } from "../keyboards";
 import { TelegramAPI } from "../../api";
 import { STATES } from "../types";
-import { mainMenuKeyboard } from "../keyboards/main-menu.keyboard";
-import { errorKeyboard } from "../keyboards/error.keyboard";
 import { defaultHandler } from "./default.handler";
+import { errorKeyboard, initialKeyboard, mainKeyboard } from "../keyboards";
 
 const startHandler = async (chatId: number, user: IUser, text = "") => {
   try {
     switch (true) {
-      case startKeyboard[0][0].text.includes(text) ||
+      case initialKeyboard[0][0].text.includes(text) ||
         errorKeyboard[0][0].text.includes(text): {
         await UserController.updateUser(user.telegramId, {
           state: { state: STATES.MAIN_MENU },
@@ -18,7 +16,7 @@ const startHandler = async (chatId: number, user: IUser, text = "") => {
         await TelegramAPI.sendMessage(chatId, {
           text: "Вітаю тебе в головному меню. Вибирай опцію)",
           reply_markup: {
-            keyboard: mainMenuKeyboard,
+            keyboard: mainKeyboard,
             one_time_keyboard: true,
             resize_keyboard: true,
           },

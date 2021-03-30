@@ -1,7 +1,7 @@
 import { TelegramAPI } from "../../api";
-import { errorKeyboard } from "../keyboards/error.keyboard";
 import { IUser, UserController } from "../../db";
 import { STATES } from "../types";
+import { errorKeyboard } from "../keyboards";
 
 const defaultHandler = async (
   chatId: number,

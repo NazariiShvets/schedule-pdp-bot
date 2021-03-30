@@ -1,2 +1,2 @@
 export * from "./handlers";
-export * from "./keyboards";
+export * from "./keyboards/buttons";

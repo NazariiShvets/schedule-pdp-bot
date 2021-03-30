@@ -1,15 +1,13 @@
 import { IUser, UserController } from "../../db";
 import { TelegramAPI } from "../../api";
-import { mainMenuKeyboard } from "../keyboards/main-menu.keyboard";
 import { STATES } from "../types";
-import { scheduleKeyboard } from "../keyboards/shedule.keyboard";
-import { errorKeyboard } from "../keyboards/error.keyboard";
 import { defaultHandler } from "./default.handler";
+import { errorKeyboard, mainKeyboard, scheduleKeyboard } from "../keyboards";
 
 const mainMenuHandler = async (chatId: number, user: IUser, text = "") => {
   try {
     switch (true) {
-      case mainMenuKeyboard[0][0].text.includes(text): {
+      case mainKeyboard[0][0].text.includes(text): {
         await UserController.updateUser(user.telegramId, {
           state: { state: STATES.SCHEDULE },
         });
@@ -26,7 +24,7 @@ const mainMenuHandler = async (chatId: number, user: IUser, text = "") => {
         break;
       }
 
-      case mainMenuKeyboard[1][0].text.includes(text): {
+      case mainKeyboard[1][0].text.includes(text): {
         await UserController.updateUser(user.telegramId, {
           state: { state: STATES.START },
         });
