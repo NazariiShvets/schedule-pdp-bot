@@ -12,6 +12,7 @@ import { TelegramAPI, TelegramBody } from "../api";
 import { db, UserController } from "../db";
 import { Callbacks, CreatePairSteps } from "./types";
 import { backToMainMenuButton } from "./new_keyboards/shared.button";
+import { createPairTeacherHandler } from "./handlers/pair/create/createPairTeacher.handler";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
   try {
@@ -53,6 +54,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
           }
 
           case CreatePairSteps.teacher: {
+            await createPairTeacherHandler(from.id, user, text);
             break;
           }
 

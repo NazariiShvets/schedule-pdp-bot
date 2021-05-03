@@ -22,6 +22,7 @@ type IState = {
   day?: DAYS;
   pair?: PAIRS_TIME;
   subject?: string;
+  teacher?: string;
 };
 
 class User extends Model<IUserModel> {}

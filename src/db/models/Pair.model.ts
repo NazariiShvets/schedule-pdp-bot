@@ -1,17 +1,16 @@
 import { DataTypes, Model } from "sequelize";
 import { db } from "../db";
 import { PairType } from "../types";
-import { User } from "./User.model";
 
 interface IPair {
-  id: number;
+  id?: number;
   subject: string;
   teacher: string;
-  classroom: string;
+  classroom?: string;
   day: string;
   time: string;
-  type: PairType;
-  isOnline: boolean;
+  type?: PairType;
+  isOnline?: boolean;
   user_id: number;
   url?: string;
 }
@@ -35,7 +34,7 @@ Pair.init(
     },
     classroom: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     day: {
       type: DataTypes.STRING,
@@ -47,21 +46,19 @@ Pair.init(
     },
     type: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     isOnline: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
-    url: DataTypes.STRING,
+    url: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
 
     user_id: {
       type: DataTypes.INTEGER,
-      references: {
-        // @ts-ignore
-        model: User,
-        key: "id",
-      },
     },
   },
   { sequelize: db, modelName: "Pair", tableName: "pairs" }

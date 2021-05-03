@@ -11,7 +11,7 @@ const createPairSubjectHandler = async (
   try {
     await UserController.updateUser(user.telegramId, {
       state: {
-        state: CreatePairSteps.subject,
+        state: CreatePairSteps.teacher,
         day: user.state.day,
         pair: user.state.pair,
         subject: text,
