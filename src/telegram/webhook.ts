@@ -8,6 +8,7 @@ import {
 import { TelegramAPI, TelegramBody } from "../api";
 import { db, UserController } from "../db";
 import { Callbacks, CreatePairSteps } from "./types";
+import { createPairDayHandler } from "./handlers/pair/create/createPairDay.handler";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
   try {
@@ -17,7 +18,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
       const { message, callback_query }: TelegramBody = JSON.parse(event.body);
 
       if (message) {
-        const { chat, from } = message;
+        const { chat, from, text } = message;
         const user = await UserController.getUser(from.id);
 
         if (!user) {
@@ -28,6 +29,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
 
         switch (user.state.state) {
           case CreatePairSteps.day: {
+            await createPairDayHandler(from.id, user, text);
             break;
           }
 
