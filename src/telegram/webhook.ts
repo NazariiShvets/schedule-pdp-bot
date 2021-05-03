@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
 import { defaultHandler, initialHandler, mainMenuHandler } from "./handlers";
-import { TelegramAPI, TelegramBody } from "../api";
+import { TelegramBody } from "../api";
 import { db, UserController } from "../db";
 import { Callbacks } from "./new_keyboards/callbacks.";
 import { deletePreviousMessage } from "../utils";
@@ -17,10 +17,10 @@ const webhook = async (event: APIGatewayProxyEvent) => {
         const user = await UserController.getUser(from.id);
 
         if (!user) {
-          await initialHandler(chat.id, from);
-
-          return { statusCode: 200 };
+          return initialHandler(chat.id, from);
         }
+
+        return defaultHandler(from.id);
       }
 
       if (callback_query) {
@@ -36,20 +36,16 @@ const webhook = async (event: APIGatewayProxyEvent) => {
 
           switch (data) {
             case Callbacks.mainMenu: {
-              await mainMenuHandler(from.id);
-
-              break;
+              return mainMenuHandler(from.id);
             }
 
             default: {
-              await defaultHandler(from.id);
+              return defaultHandler(from.id);
             }
           }
-
-          return { statusCode: 200 };
         }
 
-        await defaultHandler(from.id);
+        return defaultHandler(from.id);
       }
     }
   } catch (error) {
