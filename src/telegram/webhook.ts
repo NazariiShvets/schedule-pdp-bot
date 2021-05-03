@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
 import {
-  createPairHandler,
+  createPairStartHandler,
   defaultHandler,
   initialHandler,
   mainMenuHandler,
@@ -68,7 +68,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
             }
 
             case Callbacks.createPair: {
-              await createPairHandler(from.id, user);
+              await createPairStartHandler(from.id, user);
 
               break;
             }

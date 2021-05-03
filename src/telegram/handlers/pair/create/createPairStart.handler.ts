@@ -4,7 +4,7 @@ import { createPairDaysKeyboard } from "../../../new_keyboards";
 import { IUser, UserController } from "../../../../db";
 import { CreatePairSteps } from "../../../types";
 
-const createPairHandler = async (chatId: number, user: IUser) => {
+const createPairStartHandler = async (chatId: number, user: IUser) => {
   try {
     await UserController.updateUser(user.telegramId, {
       state: { state: CreatePairSteps.day },
@@ -23,4 +23,4 @@ const createPairHandler = async (chatId: number, user: IUser) => {
   }
 };
 
-export { createPairHandler };
+export { createPairStartHandler };
