@@ -56,7 +56,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
   } catch (error) {
     console.log(error);
   } finally {
-    // eslint-disable-next-line no-unsafe-finally,consistent-return
+    // eslint-disable-next-line consistent-return,no-unsafe-finally
     return { statusCode: 200 };
   }
 };

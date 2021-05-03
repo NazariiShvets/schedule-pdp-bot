@@ -3,6 +3,7 @@ import { STATES } from "../types";
 import { TelegramAPI, TelegramUser } from "../../api";
 import { UserController } from "../../db";
 import { initialKeyboard } from "../new_keyboards";
+import { defaultHandler } from "./default.handler";
 
 const initialHandler = async (
   chatId: number,
@@ -24,12 +25,7 @@ const initialHandler = async (
     });
 
     if (!user) {
-      await TelegramAPI.sendMessage(chatId, {
-        text: "Щось пішло не так, попробуй знову",
-        reply_markup: {
-          inline_keyboard: initialKeyboard,
-        },
-      });
+      await defaultHandler(chatId);
 
       return;
     }
@@ -40,15 +36,8 @@ const initialHandler = async (
         inline_keyboard: initialKeyboard,
       },
     });
-  } catch (e) {
-    console.error(e);
-
-    await TelegramAPI.sendMessage(chatId, {
-      text: "Щось пішло не так, попробуй знову",
-      reply_markup: {
-        keyboard: initialKeyboard,
-      },
-    });
+  } catch (error) {
+    await defaultHandler(chatId);
   }
 };
 
