@@ -1,5 +1,5 @@
 import { TelegramInlineKeyboardButton } from "../../api";
-import { Callbacks } from "./callbacks.";
+import { Callbacks } from "../types";
 
 const backToMainMenuButton: TelegramInlineKeyboardButton = {
   text: "Повернутись в головне меню",

@@ -2,7 +2,7 @@ import {
   TelegramInlineKeyboardButton,
   TelegramKeyboardMarkup,
 } from "../../api";
-import { Callbacks } from "./callbacks.";
+import { Callbacks } from "../types";
 
 const initialContinue: TelegramInlineKeyboardButton = {
   text: "Продовжити",

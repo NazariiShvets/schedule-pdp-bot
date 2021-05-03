@@ -1,3 +1,22 @@
+enum Callbacks {
+  mainMenu = "/main_menu",
+  schedule = "/schedule",
+  createPair = "/pair_create",
+  deletePair = "/delete_pair",
+  updatePair = "/update_pair",
+  showSchedule = "/schedule_show",
+  showScheduleDay = "/schedule_day",
+  showScheduleToday = "/schedule_today",
+  showScheduleWeek = "/schedule_week",
+}
+
+enum CreatePairSteps {
+  day = "create_pair_day",
+  pair = "create_pair_pair",
+  subject = "create_pair_subject",
+  teacher = "create_pair_teacher",
+}
+
 enum STATES {
   START = "START",
   MAIN_MENU = "MAIN_MENU",
@@ -24,4 +43,4 @@ enum PAIR_EDIT_ACTIONS {
   DELETE = "Удалити пару",
 }
 
-export { STATES, PAIRS_TIME, PAIR_EDIT_ACTIONS };
+export { STATES, PAIRS_TIME, PAIR_EDIT_ACTIONS, Callbacks, CreatePairSteps };

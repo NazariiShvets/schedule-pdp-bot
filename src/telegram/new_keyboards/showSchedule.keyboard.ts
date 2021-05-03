@@ -1,5 +1,5 @@
 import { TelegramInlineKeyboardButton } from "../../api";
-import { Callbacks } from "./callbacks.";
+import { Callbacks } from "../types";
 import { backToMainMenuButton } from "./shared.button";
 
 const showScheduleTodayButton: TelegramInlineKeyboardButton = {

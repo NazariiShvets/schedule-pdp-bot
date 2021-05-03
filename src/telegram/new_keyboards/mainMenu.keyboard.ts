@@ -2,7 +2,7 @@ import {
   TelegramInlineKeyboardButton,
   TelegramKeyboardMarkup,
 } from "../../api";
-import { Callbacks } from "./callbacks.";
+import { Callbacks } from "../types";
 
 const mainMenuScheduleButton: TelegramInlineKeyboardButton = {
   text: "Розклад",
