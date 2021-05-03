@@ -1,12 +1,5 @@
 import { TelegramKeyboardButton } from "../../api";
-
-enum DAYS {
-  MONDAY = "Понеділок",
-  TUESDAY = "Вівторок",
-  WEDNESDAY = "Середа",
-  THURSDAY = "Четвер",
-  FRIDAY = "П'ятниця",
-}
+import { DAYS } from "../types";
 
 const mondayButton: TelegramKeyboardButton = { text: DAYS.MONDAY };
 const tuesdayButton: TelegramKeyboardButton = { text: DAYS.TUESDAY };

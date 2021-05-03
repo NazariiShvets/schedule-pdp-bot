@@ -27,6 +27,14 @@ enum STATES {
   SCHEDULE_DAY_CREATE = "SCHEDULE_DAY_CREATE",
 }
 
+enum DAYS {
+  MONDAY = "Понеділок",
+  TUESDAY = "Вівторок",
+  WEDNESDAY = "Середа",
+  THURSDAY = "Четвер",
+  FRIDAY = "П'ятниця",
+}
+
 enum PAIRS_TIME {
   FIRST = "Перша пара",
   SECOND = "Друга пара",
@@ -43,4 +51,11 @@ enum PAIR_EDIT_ACTIONS {
   DELETE = "Удалити пару",
 }
 
-export { STATES, PAIRS_TIME, PAIR_EDIT_ACTIONS, Callbacks, CreatePairSteps };
+export {
+  STATES,
+  PAIRS_TIME,
+  PAIR_EDIT_ACTIONS,
+  DAYS,
+  Callbacks,
+  CreatePairSteps,
+};
