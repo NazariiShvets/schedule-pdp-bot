@@ -31,7 +31,7 @@ const createPairDayHandler = async (chatId: number, user: IUser, text = "") => {
     }
 
     await TelegramAPI.sendMessage(chatId, {
-      text: "Введений день невалідний. Введіть валідний день",
+      text: "Введений день невалідний. Введи валідний день",
       reply_markup: {
         keyboard: createPairDaysKeyboard,
         one_time_keyboard: true,

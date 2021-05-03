@@ -1,5 +1,6 @@
 import { TelegramKeyboardButton } from "../../api";
 import { DAYS, PAIRS_TIME } from "../types";
+import { backToMainMenuButton } from "./shared.button";
 
 const mondayButton: TelegramKeyboardButton = { text: DAYS.MONDAY };
 const tuesdayButton: TelegramKeyboardButton = { text: DAYS.TUESDAY };
@@ -22,12 +23,14 @@ const createPairDaysKeyboard = [
   [mondayButton, tuesdayButton],
   [wednesdayButton, thursdayButton],
   [fridayButton],
+  [backToMainMenuButton],
 ];
 
 const createPairTimeKeyboard = [
   [firstPairTimeButton, secondPairTimeButton],
   [thirdPairTimeButton, fourthPairTimeButton],
   [fifthPairTimeButton, sixthPairTimeButton],
+  [backToMainMenuButton],
 ];
 
 export { createPairDaysKeyboard, createPairTimeKeyboard };

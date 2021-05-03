@@ -1,6 +1,8 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
 import {
+  createPairDayHandler,
   createPairStartHandler,
+  createPairTimeHandler,
   defaultHandler,
   initialHandler,
   mainMenuHandler,
@@ -8,7 +10,7 @@ import {
 import { TelegramAPI, TelegramBody } from "../api";
 import { db, UserController } from "../db";
 import { Callbacks, CreatePairSteps } from "./types";
-import { createPairDayHandler } from "./handlers/pair/create/createPairDay.handler";
+import { backToMainMenuButton } from "./new_keyboards/shared.button";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
   try {
@@ -27,6 +29,12 @@ const webhook = async (event: APIGatewayProxyEvent) => {
           return;
         }
 
+        if (text === backToMainMenuButton.text) {
+          await mainMenuHandler(from.id);
+
+          return;
+        }
+
         switch (user.state.state) {
           case CreatePairSteps.day: {
             await createPairDayHandler(from.id, user, text);
@@ -34,6 +42,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
           }
 
           case CreatePairSteps.pair: {
+            await createPairTimeHandler(from.id, user, text);
             break;
           }
 
