@@ -23,20 +23,10 @@ const enumKeysToArray = (someEnum: any) =>
 
 const getCurrentDay = () => enumValuesToArray(DAYS)[new Date().getDay()];
 
-const deletePreviousMessage = async (
-  chatId: number,
-  messageId: number | undefined
-) => {
-  if (messageId) {
-    await TelegramAPI.deleteMessage(chatId, messageId);
-  }
-};
-
 export {
   enumValuesToArray,
   enumKeysToArray,
   convertUserToIUser,
   covertModelFromDbToIModelFromDb,
   getCurrentDay,
-  deletePreviousMessage,
 };

@@ -1,9 +1,8 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
 import { defaultHandler, initialHandler, mainMenuHandler } from "./handlers";
-import { TelegramBody } from "../api";
+import { TelegramAPI, TelegramBody } from "../api";
 import { db, UserController } from "../db";
 import { Callbacks } from "./new_keyboards/callbacks.";
-import { deletePreviousMessage } from "../utils";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
   try {
@@ -17,10 +16,12 @@ const webhook = async (event: APIGatewayProxyEvent) => {
         const user = await UserController.getUser(from.id);
 
         if (!user) {
-          return initialHandler(chat.id, from);
+          await initialHandler(chat.id, from);
+
+          return;
         }
 
-        return defaultHandler(from.id);
+        await defaultHandler(from.id);
       }
 
       if (callback_query) {
@@ -29,30 +30,35 @@ const webhook = async (event: APIGatewayProxyEvent) => {
         const user = await UserController.getUser(from.id);
 
         if (user) {
-          await deletePreviousMessage(
-            from.id,
-            callback_query.message?.message_id
-          );
+          const prevMessage = callback_query.message?.message_id;
+
+          if (prevMessage) {
+            await TelegramAPI.deleteMessage(from.id, prevMessage);
+          }
 
           switch (data) {
             case Callbacks.mainMenu: {
-              return mainMenuHandler(from.id);
+              await mainMenuHandler(from.id);
+              break;
             }
 
             default: {
-              return defaultHandler(from.id);
+              await defaultHandler(from.id);
             }
           }
+
+          return;
         }
 
-        return defaultHandler(from.id);
+        await defaultHandler(from.id);
       }
     }
   } catch (error) {
     console.log(error);
+  } finally {
+    // eslint-disable-next-line no-unsafe-finally,consistent-return
+    return { statusCode: 200 };
   }
-
-  return { statusCode: 200 };
 };
 
 export { webhook };
