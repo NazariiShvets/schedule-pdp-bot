@@ -6,6 +6,7 @@ import {
   PAIRS_TIME,
   STATES,
 } from "../../telegram/types";
+import { Callbacks } from "../../telegram/new_keyboards/callbacks.";
 
 type IUser = {
   id?: number;
@@ -18,7 +19,7 @@ type IUser = {
 type IUserModel = Omit<IUser, "state"> & { state: string };
 
 type IState = {
-  state: STATES;
+  state: Callbacks;
   day?: DAYS;
   pair?: PAIRS_TIME;
   isOddWeek?: boolean;

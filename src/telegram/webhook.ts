@@ -1,5 +1,10 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
-import { defaultHandler, initialHandler, mainMenuHandler } from "./handlers";
+import {
+  createPairHandler,
+  defaultHandler,
+  initialHandler,
+  mainMenuHandler,
+} from "./handlers";
 import { TelegramAPI, TelegramBody } from "../api";
 import { db, UserController } from "../db";
 import { Callbacks } from "./new_keyboards/callbacks.";
@@ -39,6 +44,18 @@ const webhook = async (event: APIGatewayProxyEvent) => {
           switch (data) {
             case Callbacks.mainMenu: {
               await mainMenuHandler(from.id);
+              break;
+            }
+
+            case Callbacks.createPair: {
+              if (user.state.state !== Callbacks.createPair) {
+                await UserController.updateUser(user.telegramId, {
+                  state: { state: Callbacks.createPair },
+                });
+              }
+
+              await createPairHandler(from.id);
+
               break;
             }
 
