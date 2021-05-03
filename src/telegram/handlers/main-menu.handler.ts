@@ -40,13 +40,13 @@ const mainMenuHandler = async (chatId: number, user: IUser, text = "") => {
         break;
       }
       default: {
-        await defaultHandler(chatId, user);
+        await defaultHandler(chatId);
       }
     }
   } catch (error) {
     console.log(error);
 
-    await defaultHandler(chatId, user);
+    await defaultHandler(chatId);
   }
 };
 

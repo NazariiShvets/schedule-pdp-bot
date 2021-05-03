@@ -68,13 +68,13 @@ const scheduleWeekHandler = async (chatId: number, user: IUser, text = "") => {
       }
 
       default: {
-        await defaultHandler(chatId, user);
+        await defaultHandler(chatId);
       }
     }
   } catch (error) {
     console.log(error);
 
-    await defaultHandler(chatId, user);
+    await defaultHandler(chatId);
   }
 };
 
