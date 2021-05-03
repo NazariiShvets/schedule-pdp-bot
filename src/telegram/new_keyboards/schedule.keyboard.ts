@@ -5,7 +5,7 @@ import {
 import { Callbacks } from "./callbacks.";
 
 const showScheduleButton: TelegramInlineKeyboardButton = {
-  text: "Подивись розклад",
+  text: "Подивитись розклад",
   callback_data: Callbacks.showSchedule,
 };
 

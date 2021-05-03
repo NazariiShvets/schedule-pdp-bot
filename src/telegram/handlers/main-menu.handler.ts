@@ -5,7 +5,7 @@ import { scheduleKeyboard } from "../new_keyboards";
 const mainMenuHandler = async (chatId: number) => {
   try {
     await TelegramAPI.sendMessage(chatId, {
-      text: "Значить розклад... Вибирай",
+      text: "Ти в головному меню. Вибирай",
       reply_markup: {
         inline_keyboard: scheduleKeyboard,
       },
