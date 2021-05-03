@@ -40,7 +40,7 @@ type TelegramKeyboardMarkup =
   | TelegramInlineKeyboardButton[][];
 
 type TelegramMessage = {
-  message_id: string;
+  message_id: number;
   from: TelegramUser;
   chat: TelegramChat;
   date: Date;
