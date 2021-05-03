@@ -3,12 +3,10 @@ import {
   defaultHandler,
   initialHandler,
   mainMenuHandler,
-  scheduleDayEditHandler,
-  scheduleDayEditPairHandler,
   scheduleDayHandler,
   scheduleHandler,
   startHandler,
-  scheduleDayEditPairDetailsHandler,
+  scheduleWeekHandler,
 } from "./handlers";
 import { TelegramBody } from "../api";
 import { db, UserController } from "../db";
@@ -50,26 +48,14 @@ const webhook = async (event: APIGatewayProxyEvent) => {
             break;
           }
 
+          case STATES.SCHEDULE_WEEK: {
+            await scheduleWeekHandler(chat.id, user, text);
+
+            break;
+          }
+
           case STATES.SCHEDULE_DAY: {
             await scheduleDayHandler(chat.id, user, text);
-
-            break;
-          }
-
-          case STATES.SCHEDULE_DAY_EDIT: {
-            await scheduleDayEditHandler(chat.id, user, text);
-
-            break;
-          }
-
-          case STATES.SCHEDULE_DAY_EDIT_PAIR: {
-            await scheduleDayEditPairHandler(chat.id, user, text);
-
-            break;
-          }
-
-          case STATES.SCHEDULE_DAY_EDIT_PAIR_DETAILS: {
-            await scheduleDayEditPairDetailsHandler(chat.id, user, text);
 
             break;
           }

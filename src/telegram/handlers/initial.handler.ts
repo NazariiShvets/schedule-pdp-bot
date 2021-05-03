@@ -2,7 +2,7 @@ import { Optional } from "sequelize";
 import { STATES } from "../types";
 import { TelegramAPI, TelegramUser } from "../../api";
 import { UserController } from "../../db";
-import { startKeyboard } from "../keyboards";
+import { initialKeyboard } from "../keyboards";
 
 const initialHandler = async (
   chatId: number,
@@ -29,7 +29,7 @@ const initialHandler = async (
         reply_markup: {
           one_time_keyboard: true,
           resize_keyboard: true,
-          keyboard: startKeyboard,
+          keyboard: initialKeyboard,
         },
       });
 
@@ -37,11 +37,11 @@ const initialHandler = async (
     }
 
     await TelegramAPI.sendMessage(chatId, {
-      text: `Привіт ${user.firstName}! Вітаю в боті розкладу занять. Щоб перейти до головного меню нажми кнопку ${startKeyboard[0][0].text}`,
+      text: `Привіт ${user.firstName}! Вітаю в боті розкладу занять. Щоб перейти до головного меню нажми кнопку ${initialKeyboard[0][0].text}`,
       reply_markup: {
         one_time_keyboard: true,
         resize_keyboard: true,
-        keyboard: startKeyboard,
+        keyboard: initialKeyboard,
       },
     });
   } catch (e) {
@@ -52,7 +52,7 @@ const initialHandler = async (
       reply_markup: {
         one_time_keyboard: true,
         resize_keyboard: true,
-        keyboard: startKeyboard,
+        keyboard: initialKeyboard,
       },
     });
   }
