@@ -1,5 +1,6 @@
 import { IUser, IUserModel, User } from "./db";
 import { DAYS } from "./telegram/types";
+import { TelegramAPI } from "./api";
 
 const covertModelFromDbToIModelFromDb = <T, K>(model: T): K =>
   (model as any).dataValues as K;
@@ -22,10 +23,20 @@ const enumKeysToArray = (someEnum: any) =>
 
 const getCurrentDay = () => enumValuesToArray(DAYS)[new Date().getDay()];
 
+const deletePreviousMessage = async (
+  chatId: number,
+  messageId: number | undefined
+) => {
+  if (messageId) {
+    await TelegramAPI.deleteMessage(chatId, messageId);
+  }
+};
+
 export {
   enumValuesToArray,
   enumKeysToArray,
   convertUserToIUser,
   covertModelFromDbToIModelFromDb,
   getCurrentDay,
+  deletePreviousMessage,
 };

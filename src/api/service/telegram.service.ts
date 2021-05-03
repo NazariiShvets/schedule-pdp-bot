@@ -17,6 +17,16 @@ class TelegramAPI {
       .catch((error: AxiosError) => {
         console.error("TelegramError", error?.response?.data);
       });
+
+  static deleteMessage = async (chat_id: number, message_id: number) =>
+    axios
+      .post(`${baseUrl}/deleteMessage`, {
+        chat_id,
+        message_id,
+      })
+      .catch((error: AxiosError) => {
+        console.error("TelegramError", error?.response?.data);
+      });
 }
 
 export { TelegramAPI };
