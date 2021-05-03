@@ -2,6 +2,7 @@ import { defaultHandler } from "../../default.handler";
 import { TelegramAPI } from "../../../../api";
 import { IUser, UserController } from "../../../../db";
 import { CreatePairSteps } from "../../../types";
+import { backToMainMenuButton } from "../../../new_keyboards/shared.button";
 
 const createPairSubjectHandler = async (
   chatId: number,
@@ -20,6 +21,9 @@ const createPairSubjectHandler = async (
 
     await TelegramAPI.sendMessage(chatId, {
       text: "Ок, тепер викладач. Як його звуть?",
+      reply_markup: {
+        keyboard: [[backToMainMenuButton]],
+      },
     });
   } catch (error) {
     await defaultHandler(chatId);

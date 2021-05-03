@@ -1,5 +1,5 @@
 import { Optional } from "sequelize";
-import { STATES } from "../types";
+import { Callbacks } from "../types";
 import { TelegramAPI, TelegramUser } from "../../api";
 import { UserController } from "../../db";
 import { initialKeyboard } from "../new_keyboards";
@@ -21,7 +21,7 @@ const initialHandler = async (
       telegramId: id,
       firstName: first_name,
       lastName: last_name,
-      state: { state: STATES.START },
+      state: { state: Callbacks.initials },
     });
 
     if (!user) {

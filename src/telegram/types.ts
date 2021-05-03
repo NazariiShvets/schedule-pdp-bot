@@ -1,4 +1,5 @@
 enum Callbacks {
+  initials = "/initial",
   mainMenu = "/main_menu",
   schedule = "/schedule",
   createPair = "/pair_create",
