@@ -7,7 +7,7 @@ import {
 } from "./handlers";
 import { TelegramAPI, TelegramBody } from "../api";
 import { db, UserController } from "../db";
-import { Callbacks } from "./new_keyboards/callbacks.";
+import { Callbacks, CreatePairSteps } from "./types";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
   try {
@@ -26,7 +26,27 @@ const webhook = async (event: APIGatewayProxyEvent) => {
           return;
         }
 
-        await defaultHandler(from.id);
+        switch (user.state.state) {
+          case CreatePairSteps.day: {
+            break;
+          }
+
+          case CreatePairSteps.pair: {
+            break;
+          }
+
+          case CreatePairSteps.subject: {
+            break;
+          }
+
+          case CreatePairSteps.teacher: {
+            break;
+          }
+
+          default: {
+            await defaultHandler(from.id);
+          }
+        }
       }
 
       if (callback_query) {
@@ -48,13 +68,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
             }
 
             case Callbacks.createPair: {
-              if (user.state.state !== Callbacks.createPair) {
-                await UserController.updateUser(user.telegramId, {
-                  state: { state: Callbacks.createPair },
-                });
-              }
-
-              await createPairHandler(from.id);
+              await createPairHandler(from.id, user);
 
               break;
             }
