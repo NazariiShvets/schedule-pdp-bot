@@ -37,8 +37,6 @@ const initialHandler = async (
     await TelegramAPI.sendMessage(chatId, {
       text: `Привіт ${user.firstName}! Вітаю в боті розкладу занять. Щоб перейти до головного меню нажми кнопку ${initialKeyboard[0][0].text}`,
       reply_markup: {
-        one_time_keyboard: true,
-        resize_keyboard: true,
         inline_keyboard: initialKeyboard,
       },
     });
@@ -48,8 +46,6 @@ const initialHandler = async (
     await TelegramAPI.sendMessage(chatId, {
       text: "Щось пішло не так, попробуй знову",
       reply_markup: {
-        one_time_keyboard: true,
-        resize_keyboard: true,
         keyboard: initialKeyboard,
       },
     });

@@ -6,7 +6,6 @@ const defaultHandler = async (chatId: number) => {
     text: "Щось пішло не так",
     reply_markup: {
       inline_keyboard: errorKeyboard,
-      one_time_keyboard: true,
     },
   });
 };

@@ -3,7 +3,6 @@ import {
   TelegramKeyboardMarkup,
 } from "../../api";
 import { Callbacks } from "./callbacks.";
-import { backToMainMenuButton } from "./shared.button";
 
 const showScheduleButton: TelegramInlineKeyboardButton = {
   text: "Подивись розклад",
@@ -28,7 +27,6 @@ const delelePairButton: TelegramInlineKeyboardButton = {
 const scheduleKeyboard: TelegramKeyboardMarkup = [
   [showScheduleButton],
   [createPairButton, updatePairButton, delelePairButton],
-  [backToMainMenuButton],
 ];
 
 export { scheduleKeyboard };
