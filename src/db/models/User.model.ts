@@ -1,12 +1,11 @@
 import { DataTypes, Model } from "sequelize";
 import { db } from "../db";
 import {
+  Callbacks,
+  CreatePairSteps,
   DAYS,
-  PAIR_EDIT_ACTIONS,
   PAIRS_TIME,
-  STATES,
 } from "../../telegram/types";
-import { Callbacks } from "../../telegram/new_keyboards/callbacks.";
 
 type IUser = {
   id?: number;
@@ -19,11 +18,10 @@ type IUser = {
 type IUserModel = Omit<IUser, "state"> & { state: string };
 
 type IState = {
-  state: Callbacks;
+  state: CreatePairSteps | Callbacks;
   day?: DAYS;
   pair?: PAIRS_TIME;
-  isOddWeek?: boolean;
-  pairEditAction?: PAIR_EDIT_ACTIONS;
+  subject?: string;
 };
 
 class User extends Model<IUserModel> {}

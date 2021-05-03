@@ -2,6 +2,7 @@ import { APIGatewayProxyEvent } from "aws-lambda";
 import {
   createPairDayHandler,
   createPairStartHandler,
+  createPairSubjectHandler,
   createPairTimeHandler,
   defaultHandler,
   initialHandler,
@@ -47,6 +48,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
           }
 
           case CreatePairSteps.subject: {
+            await createPairSubjectHandler(from.id, user, text);
             break;
           }
 
