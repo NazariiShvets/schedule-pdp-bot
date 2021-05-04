@@ -1,10 +1,6 @@
-import dotenv, { DotenvConfigOutput } from "dotenv";
+import dotenv from "dotenv";
 
-const result: DotenvConfigOutput = dotenv.config();
-
-if (result.error) {
-  throw new Error("DoteEnv error");
-}
+dotenv.config();
 
 const dbPassword: string = process.env.DB_PASSWORD!;
 const dbName: string = process.env.DB_NAME!;
