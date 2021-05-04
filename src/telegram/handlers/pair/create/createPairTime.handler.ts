@@ -3,6 +3,7 @@ import { TelegramAPI } from "../../../../api";
 import { createPairTimeKeyboard } from "../../../new_keyboards";
 import { IUser, UserController } from "../../../../db";
 import { CreatePairSteps, PAIRS_TIME } from "../../../types";
+import { backToMainMenuButton } from "../../../new_keyboards/shared.button";
 
 const createPairTimeHandler = async (
   chatId: number,
@@ -25,6 +26,11 @@ const createPairTimeHandler = async (
 
       await TelegramAPI.sendMessage(chatId, {
         text: "Ок, тепер введи предмет",
+        reply_markup: {
+          keyboard: [[backToMainMenuButton]],
+          resize_keyboard: true,
+          one_time_keyboard: true,
+        },
       });
 
       return;

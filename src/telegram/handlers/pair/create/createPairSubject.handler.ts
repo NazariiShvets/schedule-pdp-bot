@@ -23,6 +23,8 @@ const createPairSubjectHandler = async (
       text: "Ок, тепер викладач. Як його звуть?",
       reply_markup: {
         keyboard: [[backToMainMenuButton]],
+        one_time_keyboard: true,
+        resize_keyboard: true,
       },
     });
   } catch (error) {

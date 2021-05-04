@@ -32,6 +32,10 @@ const webhook = async (event: APIGatewayProxyEvent) => {
         }
 
         if (text === backToMainMenuButton.text) {
+          await UserController.updateUser(from.id, {
+            state: { state: Callbacks.mainMenu },
+          });
+
           await mainMenuHandler(from.id);
 
           return;
@@ -75,6 +79,10 @@ const webhook = async (event: APIGatewayProxyEvent) => {
           if (prevMessage) {
             await TelegramAPI.deleteMessage(from.id, prevMessage);
           }
+
+          await UserController.updateUser(from.id, {
+            state: { state: Callbacks.mainMenu },
+          });
 
           switch (data) {
             case Callbacks.mainMenu: {
