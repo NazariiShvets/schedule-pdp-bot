@@ -4,6 +4,7 @@ import {
   Callbacks,
   CreatePairSteps,
   DAYS,
+  DeletePairSteps,
   PAIRS_TIME,
 } from "../../telegram/types";
 
@@ -18,7 +19,7 @@ type IUser = {
 type IUserModel = Omit<IUser, "state"> & { state: string };
 
 type IState = {
-  state: CreatePairSteps | Callbacks;
+  state: CreatePairSteps | DeletePairSteps | Callbacks;
   day?: DAYS;
   pair?: PAIRS_TIME;
   subject?: string;

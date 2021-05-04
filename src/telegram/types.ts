@@ -4,6 +4,7 @@ enum Callbacks {
   schedule = "/schedule",
   createPair = "/pair_create",
   deletePair = "/delete_pair",
+  deletePairConfirm = "/delete_pair_confirm",
   updatePair = "/update_pair",
   showSchedule = "/schedule_show",
   showScheduleDay = "/schedule_day",
@@ -16,6 +17,11 @@ enum CreatePairSteps {
   pair = "create_pair_pair",
   subject = "create_pair_subject",
   teacher = "create_pair_teacher",
+}
+
+enum DeletePairSteps {
+  day = "delete_pair_day",
+  pair = "delete_pair_pair",
 }
 
 enum DAYS {
@@ -35,4 +41,4 @@ enum PAIRS_TIME {
   SIXTH = "Шоста пара",
 }
 
-export { PAIRS_TIME, DAYS, Callbacks, CreatePairSteps };
+export { PAIRS_TIME, DAYS, Callbacks, CreatePairSteps, DeletePairSteps };

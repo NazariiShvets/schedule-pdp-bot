@@ -1,7 +1,7 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
 import { TelegramAPI, TelegramBody } from "../api";
 import { db, UserController } from "../db";
-import { Callbacks, CreatePairSteps } from "./types";
+import { Callbacks, CreatePairSteps, DeletePairSteps } from "./types";
 import { backToMainMenuButton } from "./keyboards";
 import {
   createPairDayHandler,
@@ -16,8 +16,12 @@ import {
   showPairsChooseDayHandler,
   showPairsSpecificDayHandler,
   showPairsDayHandler,
+  showPairsWeekHandler,
+  deletePairMenuHandler,
+  deletePairTimeHandler,
+  deletePairDayHandler,
 } from "./handlers";
-import { showPairsWeekHandler } from "./handlers/pair/show/showPairsWeek.handler";
+import { deletePairConfirmHandler } from "./handlers/pair/delete/deletePairConfirmHandler";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
   try {
@@ -69,6 +73,16 @@ const webhook = async (event: APIGatewayProxyEvent) => {
 
           case Callbacks.showScheduleDay: {
             await showPairsSpecificDayHandler(from.id, text);
+            break;
+          }
+
+          case DeletePairSteps.day: {
+            await deletePairDayHandler(from.id, user, text);
+            break;
+          }
+
+          case DeletePairSteps.pair: {
+            await deletePairTimeHandler(from.id, user, text);
             break;
           }
 
@@ -126,6 +140,18 @@ const webhook = async (event: APIGatewayProxyEvent) => {
 
             case Callbacks.showScheduleWeek: {
               await showPairsWeekHandler(from.id);
+
+              break;
+            }
+
+            case Callbacks.deletePair: {
+              await deletePairMenuHandler(from.id);
+
+              break;
+            }
+
+            case Callbacks.deletePairConfirm: {
+              await deletePairConfirmHandler(from.id, user);
 
               break;
             }
