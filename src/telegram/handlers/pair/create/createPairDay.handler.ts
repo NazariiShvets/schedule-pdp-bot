@@ -15,7 +15,11 @@ const createPairDayHandler = async (chatId: number, user: IUser, text = "") => {
 
     if (matchedDay) {
       await UserController.updateUser(user.telegramId, {
-        state: { state: CreatePairSteps.pair, day: matchedDay },
+        state: {
+          ...user.state,
+          state: CreatePairSteps.pair,
+          day: matchedDay,
+        },
       });
 
       await TelegramAPI.sendMessage(chatId, {

@@ -2,7 +2,7 @@ import { defaultHandler } from "../../default.handler";
 import { TelegramAPI } from "../../../../api";
 import { IUser, UserController } from "../../../../db";
 import { CreatePairSteps } from "../../../types";
-import { backToMainMenuButton } from "../../../new_keyboards/shared.button";
+import { backToMainMenuButton } from "../../../new_keyboards";
 
 const createPairSubjectHandler = async (
   chatId: number,
@@ -12,9 +12,8 @@ const createPairSubjectHandler = async (
   try {
     await UserController.updateUser(user.telegramId, {
       state: {
+        ...user.state,
         state: CreatePairSteps.teacher,
-        day: user.state.day,
-        pair: user.state.pair,
         subject: text,
       },
     });
