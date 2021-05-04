@@ -1,5 +1,5 @@
 import { TelegramAPI } from "../../api";
-import { errorKeyboard } from "../new_keyboards";
+import { errorKeyboard } from "../keyboards";
 
 const defaultHandler = async (chatId: number) => {
   try {

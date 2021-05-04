@@ -2,7 +2,7 @@ import { APIGatewayProxyEvent } from "aws-lambda";
 import { TelegramAPI, TelegramBody } from "../api";
 import { db, UserController } from "../db";
 import { Callbacks, CreatePairSteps } from "./types";
-import { backToMainMenuButton } from "./new_keyboards";
+import { backToMainMenuButton } from "./keyboards";
 import {
   createPairDayHandler,
   createPairStartHandler,

@@ -1,5 +1,14 @@
-import { IUser, User } from "../models";
-import { convertUserToIUser } from "../../utils";
+import { IUser, IUserModel, User } from "../models";
+import { covertModelFromDbToIModelFromDb } from "../../utils";
+
+const convertUserToIUser = (user: User): IUser => {
+  const userModel = covertModelFromDbToIModelFromDb<User, IUserModel>(user);
+
+  return {
+    ...userModel,
+    state: JSON.parse(userModel.state),
+  };
+};
 
 class UserController {
   static createUser = async (userData: IUser): Promise<IUser | null> => {

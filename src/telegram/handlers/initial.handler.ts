@@ -2,7 +2,7 @@ import { Optional } from "sequelize";
 import { Callbacks } from "../types";
 import { TelegramAPI, TelegramUser } from "../../api";
 import { UserController } from "../../db";
-import { initialKeyboard } from "../new_keyboards";
+import { initialKeyboard } from "../keyboards";
 import { defaultHandler } from "./default.handler";
 
 const initialHandler = async (

@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { SendMessageRequest } from "../models/telegram.model";
+import { SendMessageRequest } from "../models";
 
 const TOKEN = process.env.TELEGRAM_TOKEN;
 const baseUrl = `https://api.telegram.org/bot${TOKEN}`;

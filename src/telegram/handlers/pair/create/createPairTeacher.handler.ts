@@ -2,7 +2,7 @@ import { defaultHandler } from "../../default.handler";
 import { TelegramAPI } from "../../../../api";
 import { IUser, PairController, UserController } from "../../../../db";
 import { Callbacks } from "../../../types";
-import { backToMainMenuButton } from "../../../new_keyboards";
+import { backToMainMenuButton } from "../../../keyboards";
 
 const createPairTeacherHandler = async (
   chatId: number,

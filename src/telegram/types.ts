@@ -18,16 +18,6 @@ enum CreatePairSteps {
   teacher = "create_pair_teacher",
 }
 
-enum STATES {
-  START = "START",
-  MAIN_MENU = "MAIN_MENU",
-  SCHEDULE = "SCHEDULE",
-  SCHEDULE_WEEK = "SCHEDULE_WEEK",
-  SCHEDULE_DAY = "SCHEDULE_DAY",
-  SCHEDULE_DAY_EDIT = "SCHEDULE_DAY_EDIT",
-  SCHEDULE_DAY_CREATE = "SCHEDULE_DAY_CREATE",
-}
-
 enum DAYS {
   MONDAY = "Понеділок",
   TUESDAY = "Вівторок",
@@ -45,18 +35,4 @@ enum PAIRS_TIME {
   SIXTH = "Шоста пара",
 }
 
-enum PAIR_EDIT_ACTIONS {
-  NAME = "Редагувати назву",
-  TEACHER = "Редагувати викладача",
-  CLASSROOM = "Редагувати аудиторію",
-  DELETE = "Удалити пару",
-}
-
-export {
-  STATES,
-  PAIRS_TIME,
-  PAIR_EDIT_ACTIONS,
-  DAYS,
-  Callbacks,
-  CreatePairSteps,
-};
+export { PAIRS_TIME, DAYS, Callbacks, CreatePairSteps };

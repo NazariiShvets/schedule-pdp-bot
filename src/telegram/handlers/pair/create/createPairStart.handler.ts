@@ -1,6 +1,6 @@
 import { defaultHandler } from "../../default.handler";
 import { TelegramAPI } from "../../../../api";
-import { createPairDaysKeyboard } from "../../../new_keyboards";
+import { createPairDaysKeyboard } from "../../../keyboards";
 import { IUser, UserController } from "../../../../db";
 import { CreatePairSteps } from "../../../types";
 

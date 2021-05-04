@@ -14,7 +14,5 @@ type SendMessageRequest = {
   allow_sending_without_reply?: boolean;
   reply_markup?: TelegramInlineKeyboardMarkup | TelegramReplyKeyboardMarkup;
 };
-type SendMessageResponse = Record<string, unknown>;
-type SendMessageReturn = SendMessageResponse;
 
-export { SendMessageRequest, SendMessageResponse, SendMessageReturn };
+export { SendMessageRequest };

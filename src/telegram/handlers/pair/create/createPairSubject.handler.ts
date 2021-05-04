@@ -2,7 +2,7 @@ import { defaultHandler } from "../../default.handler";
 import { TelegramAPI } from "../../../../api";
 import { IUser, UserController } from "../../../../db";
 import { CreatePairSteps } from "../../../types";
-import { backToMainMenuButton } from "../../../new_keyboards";
+import { backToMainMenuButton } from "../../../keyboards";
 
 const createPairSubjectHandler = async (
   chatId: number,

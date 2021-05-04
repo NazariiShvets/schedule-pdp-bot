@@ -1,6 +1,6 @@
 import { TelegramAPI } from "../../api";
 import { defaultHandler } from "./default.handler";
-import { scheduleKeyboard } from "../new_keyboards";
+import { scheduleKeyboard } from "../keyboards";
 
 const mainMenuHandler = async (chatId: number) => {
   try {

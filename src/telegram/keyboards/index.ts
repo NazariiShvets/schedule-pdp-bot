@@ -1,2 +1,8 @@
-export * from "./buttons";
-export * from "./keyboards";
+export * from "./initial.keyboard";
+export * from "./mainMenu.keyboard";
+export * from "./schedule.keyboard";
+export * from "./showSchedule.keyboard";
+export * from "./error.keyboard";
+export * from "./createPair.keyboard";
+
+export * from "./shared.button";

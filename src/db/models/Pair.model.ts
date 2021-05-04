@@ -1,6 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import { db } from "../db";
-import { PairType } from "../types";
 
 interface IPair {
   id?: number;
@@ -9,7 +8,7 @@ interface IPair {
   classroom?: string;
   day: string;
   time: string;
-  type?: PairType;
+  type?: string;
   isOnline?: boolean;
   user_id: number;
   url?: string;

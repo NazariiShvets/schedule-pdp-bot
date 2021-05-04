@@ -3,7 +3,7 @@ import { TelegramAPI } from "../../../../api";
 import {
   createPairTimeKeyboard,
   backToMainMenuButton,
-} from "../../../new_keyboards";
+} from "../../../keyboards";
 import { IUser, UserController } from "../../../../db";
 import { CreatePairSteps, PAIRS_TIME } from "../../../types";
 
