@@ -3,13 +3,8 @@ import { TelegramAPI } from "../../../../api";
 import { showPairDayMenuKeyboard } from "../../../keyboards";
 import { DAYS } from "../../../types";
 import { showPairsDayHandler } from "./showPairsDayHandler";
-import { IUser } from "../../../../db";
 
-const showPairsSpecificDayHandler = async (
-  chatId: number,
-  user: IUser,
-  text = ""
-) => {
+const showPairsSpecificDayHandler = async (chatId: number, text = "") => {
   try {
     const matchedDay = Object.values(DAYS).find(
       (day) => day.toLowerCase() === text.toLowerCase()

@@ -17,6 +17,7 @@ import {
   showPairsSpecificDayHandler,
   showPairsDayHandler,
 } from "./handlers";
+import { showPairsWeekHandler } from "./handlers/pair/show/showPairsWeek.handler";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
   try {
@@ -67,7 +68,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
           }
 
           case Callbacks.showScheduleDay: {
-            await showPairsSpecificDayHandler(from.id, user, text);
+            await showPairsSpecificDayHandler(from.id, text);
             break;
           }
 
@@ -119,6 +120,12 @@ const webhook = async (event: APIGatewayProxyEvent) => {
 
             case Callbacks.showScheduleDay: {
               await showPairsChooseDayHandler(from.id);
+
+              break;
+            }
+
+            case Callbacks.showScheduleWeek: {
+              await showPairsWeekHandler(from.id);
 
               break;
             }
