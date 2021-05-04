@@ -1,6 +1,6 @@
-import { TelegramKeyboardButton } from "../../api";
-import { DAYS, PAIRS_TIME } from "../types";
-import { backToMainMenuButton } from "./shared.button";
+import { TelegramKeyboardButton } from "../../../api";
+import { DAYS, PAIRS_TIME } from "../../types";
+import { backToMainMenuButton } from "../shared.button";
 
 const mondayButton: TelegramKeyboardButton = { text: DAYS.MONDAY };
 const tuesdayButton: TelegramKeyboardButton = { text: DAYS.TUESDAY };
