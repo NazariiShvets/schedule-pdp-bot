@@ -13,8 +13,9 @@ import {
   initialHandler,
   mainMenuHandler,
   showPairMenuHandler,
+  showPairsChooseDayHandler,
+  showPairsSpecificDayHandler,
   showPairsDayHandler,
-  showPairsTodayHandler,
 } from "./handlers";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
@@ -65,6 +66,11 @@ const webhook = async (event: APIGatewayProxyEvent) => {
             break;
           }
 
+          case Callbacks.showScheduleDay: {
+            await showPairsSpecificDayHandler(from.id, user, text);
+            break;
+          }
+
           default: {
             await defaultHandler(from.id);
           }
@@ -106,13 +112,13 @@ const webhook = async (event: APIGatewayProxyEvent) => {
             }
 
             case Callbacks.showScheduleToday: {
-              await showPairsTodayHandler(from.id);
+              await showPairsDayHandler(from.id);
 
               break;
             }
 
             case Callbacks.showScheduleDay: {
-              await showPairsDayHandler(from.id);
+              await showPairsChooseDayHandler(from.id);
 
               break;
             }

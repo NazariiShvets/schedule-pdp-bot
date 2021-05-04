@@ -4,7 +4,7 @@ import { showPairDayMenuKeyboard } from "../../../keyboards";
 import { UserController } from "../../../../db";
 import { Callbacks } from "../../../types";
 
-const showPairsDayHandler = async (chatId: number) => {
+const showPairsChooseDayHandler = async (chatId: number) => {
   try {
     await UserController.updateUser(chatId, {
       state: { state: Callbacks.showScheduleDay },
@@ -23,4 +23,4 @@ const showPairsDayHandler = async (chatId: number) => {
   }
 };
 
-export { showPairsDayHandler };
+export { showPairsChooseDayHandler };

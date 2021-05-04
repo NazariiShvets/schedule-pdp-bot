@@ -4,10 +4,10 @@ import { showPairTodayMenuKeyboard } from "../../../keyboards";
 import { PairController } from "../../../../db";
 import { DAYS } from "../../../types";
 
-const showPairsTodayHandler = async (chatId: number) => {
-  try {
-    const day = Object.values(DAYS)[new Date().getDay()];
+const today = Object.values(DAYS)[new Date().getDay()];
 
+const showPairsDayHandler = async (chatId: number, day: string = today) => {
+  try {
     const pairs = await PairController.getAllPairs({
       user_id: chatId,
       day,
@@ -42,4 +42,4 @@ const showPairsTodayHandler = async (chatId: number) => {
   }
 };
 
-export { showPairsTodayHandler };
+export { showPairsDayHandler };
