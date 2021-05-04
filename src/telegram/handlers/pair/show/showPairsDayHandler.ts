@@ -38,14 +38,15 @@ const showPairsDayHandler = async (
       return;
     }
 
-    await TelegramAPI.sendMessage(chatId, {
-      text: `<b><u>${day}</u></b>\n\n${pairs
-        .map(
-          (pair) =>
-            `<b>Час</b>: <i>${pair.time}</i>\n<b>Предмет</b>: <i>${pair.subject}</i>\n<b>Викладач</b>: <i>${pair.teacher}</i>\n`
-        )
-        .join("\n")}`,
+    const text = `<b><u>${day}</u></b>\n\n${pairs
+      .map(
+        (pair) =>
+          `<b>Час</b>: <i>${pair.time}</i>\n<b>Предмет</b>: <i>${pair.subject}</i>\n<b>Викладач</b>: <i>${pair.teacher}</i>\n`
+      )
+      .join("\n")}`;
 
+    await TelegramAPI.sendMessage(chatId, {
+      text,
       parse_mode: "HTML",
       reply_markup: replyMarkup,
     });
