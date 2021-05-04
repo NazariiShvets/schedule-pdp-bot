@@ -1,6 +1,6 @@
 import { defaultHandler } from "../../default.handler";
 import { TelegramAPI } from "../../../../api";
-import { showPairMenuKeyboard } from "../../../keyboards";
+import { showPairTodayMenuKeyboard } from "../../../keyboards";
 import { PairController } from "../../../../db";
 import { DAYS } from "../../../types";
 
@@ -17,7 +17,7 @@ const showPairsTodayHandler = async (chatId: number) => {
       await TelegramAPI.sendMessage(chatId, {
         text: `Список пар пустий`,
         reply_markup: {
-          inline_keyboard: showPairMenuKeyboard,
+          inline_keyboard: showPairTodayMenuKeyboard,
         },
       });
 
@@ -34,7 +34,7 @@ const showPairsTodayHandler = async (chatId: number) => {
 
       parse_mode: "HTML",
       reply_markup: {
-        inline_keyboard: showPairMenuKeyboard,
+        inline_keyboard: showPairTodayMenuKeyboard,
       },
     });
   } catch (error) {

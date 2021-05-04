@@ -7,12 +7,13 @@ import {
   createPairDayHandler,
   createPairStartHandler,
   createPairSubjectHandler,
+  createPairTeacherHandler,
   createPairTimeHandler,
   defaultHandler,
   initialHandler,
   mainMenuHandler,
-  createPairTeacherHandler,
   showPairMenuHandler,
+  showPairsDayHandler,
   showPairsTodayHandler,
 } from "./handlers";
 
@@ -106,6 +107,12 @@ const webhook = async (event: APIGatewayProxyEvent) => {
 
             case Callbacks.showScheduleToday: {
               await showPairsTodayHandler(from.id);
+
+              break;
+            }
+
+            case Callbacks.showScheduleDay: {
+              await showPairsDayHandler(from.id);
 
               break;
             }

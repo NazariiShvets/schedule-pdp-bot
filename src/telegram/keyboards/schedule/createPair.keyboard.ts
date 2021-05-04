@@ -1,12 +1,13 @@
 import { TelegramKeyboardButton } from "../../../api";
-import { DAYS, PAIRS_TIME } from "../../types";
+import { PAIRS_TIME } from "../../types";
 import { backToMainMenuButton } from "../shared.button";
-
-const mondayButton: TelegramKeyboardButton = { text: DAYS.MONDAY };
-const tuesdayButton: TelegramKeyboardButton = { text: DAYS.TUESDAY };
-const wednesdayButton: TelegramKeyboardButton = { text: DAYS.WEDNESDAY };
-const thursdayButton: TelegramKeyboardButton = { text: DAYS.THURSDAY };
-const fridayButton: TelegramKeyboardButton = { text: DAYS.FRIDAY };
+import {
+  fridayButton,
+  mondayButton,
+  thursdayButton,
+  tuesdayButton,
+  wednesdayButton,
+} from "./shared.keyboard";
 
 const firstPairTimeButton: TelegramKeyboardButton = { text: PAIRS_TIME.FIRST };
 const secondPairTimeButton: TelegramKeyboardButton = {
