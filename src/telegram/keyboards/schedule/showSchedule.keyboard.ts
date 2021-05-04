@@ -1,4 +1,7 @@
-import { TelegramInlineKeyboardButton } from "../../../api";
+import {
+  TelegramInlineKeyboardButton,
+  TelegramKeyboardMarkup,
+} from "../../../api";
 import { Callbacks } from "../../types";
 import { backToMainMenuButton } from "../shared.button";
 
@@ -17,10 +20,20 @@ const showScheduleWeekButton: TelegramInlineKeyboardButton = {
   callback_data: Callbacks.showScheduleWeek,
 };
 
+const backToShowScheduleMenu: TelegramInlineKeyboardButton = {
+  text: "Повернутись до меню показу розкладу",
+  callback_data: Callbacks.showSchedule,
+};
+
+const showPairMenuKeyboard: TelegramKeyboardMarkup = [
+  [backToShowScheduleMenu],
+  [backToMainMenuButton],
+];
+
 const showScheduleKeyboard = [
   [showScheduleTodayButton, showScheduleDayButton],
   [showScheduleWeekButton],
   [backToMainMenuButton],
 ];
 
-export { showScheduleKeyboard };
+export { showScheduleKeyboard, showPairMenuKeyboard };

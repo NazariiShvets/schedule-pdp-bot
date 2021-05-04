@@ -13,6 +13,7 @@ import {
   mainMenuHandler,
   createPairTeacherHandler,
   showPairMenuHandler,
+  showPairsTodayHandler,
 } from "./handlers";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
@@ -99,6 +100,12 @@ const webhook = async (event: APIGatewayProxyEvent) => {
 
             case Callbacks.showSchedule: {
               await showPairMenuHandler(from.id);
+
+              break;
+            }
+
+            case Callbacks.showScheduleToday: {
+              await showPairsTodayHandler(from.id);
 
               break;
             }
