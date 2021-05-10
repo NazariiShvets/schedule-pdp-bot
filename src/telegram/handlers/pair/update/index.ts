@@ -1,3 +1,3 @@
-export * from "./update-pair-day";
-export * from "./update-pair-menu";
-export * from "./update-pair-time";
+export * from "./update-pair-choose-day";
+export * from "./update-pair-choose-menu";
+export * from "./update-pair-choose-time";

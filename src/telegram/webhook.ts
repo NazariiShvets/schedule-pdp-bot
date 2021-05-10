@@ -7,16 +7,15 @@ import {
   DeletePairSteps,
   UpdatePairSteps,
 } from "./types";
-import { backToMainMenuButton } from "./keyboards";
 import {
+  errorHandler,
+  initialHandler,
+  mainMenuHandler,
   createPairDayHandler,
   createPairStartHandler,
   createPairSubjectHandler,
   createPairTeacherHandler,
   createPairTimeHandler,
-  errorHandler,
-  initialHandler,
-  mainMenuHandler,
   showPairMenuHandler,
   showPairsChooseDayHandler,
   showPairsSpecificDayHandler,
@@ -25,11 +24,12 @@ import {
   deletePairMenuHandler,
   deletePairTimeHandler,
   deletePairDayHandler,
-  updatePairMenuHandler,
-  updatePairDayHandler,
-  updatePairTimeHandler,
+  deletePairConfirmHandler,
+  updatePairChooseMenuHandler,
+  updatePairChooseDayHandler,
+  updatePairChooseTimeHandler,
+  backToMainMenuButton,
 } from "./handlers";
-import { deletePairConfirmHandler } from "./handlers/pair/delete/deletePairTimeHandler";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
   try {
@@ -95,12 +95,12 @@ const webhook = async (event: APIGatewayProxyEvent) => {
           }
 
           case UpdatePairSteps.day: {
-            await updatePairDayHandler(from.id, user, text);
+            await updatePairChooseDayHandler(from.id, user, text);
             break;
           }
 
           case UpdatePairSteps.pair: {
-            await updatePairTimeHandler(from.id, user, text);
+            await updatePairChooseTimeHandler(from.id, user, text);
             break;
           }
 
@@ -175,7 +175,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
             }
 
             case Callbacks.updatePair: {
-              await updatePairMenuHandler(from.id);
+              await updatePairChooseMenuHandler(from.id);
 
               break;
             }

@@ -5,13 +5,13 @@ import {
   invalidText,
   successKeyboard,
   getSuccessText,
-} from "./update-pair-time.keyboard";
+} from "./update-pair-choose-time.keyboard";
 import { validatePair } from "../../../../../utils";
 import { IUser, PairController, UserController } from "../../../../../db";
 import { TelegramAPI } from "../../../../../api";
 import { errorHandler } from "../../../error";
 
-const updatePairTimeHandler = async (
+const updatePairChooseTimeHandler = async (
   chatId: number,
   user: IUser,
   text = ""
@@ -65,4 +65,4 @@ const updatePairTimeHandler = async (
   }
 };
 
-export { updatePairTimeHandler };
+export { updatePairChooseTimeHandler };

@@ -3,14 +3,18 @@ import {
   invalidText,
   successKeyboard,
   successText,
-} from "./update-pair-day.keyboard";
+} from "./update-pair-choose-day.keyboard";
 import { IUser, UserController } from "../../../../../db";
 import { validateDay } from "../../../../../utils";
 import { UpdatePairSteps } from "../../../../types";
 import { TelegramAPI } from "../../../../../api";
 import { errorHandler } from "../../../error";
 
-const updatePairDayHandler = async (chatId: number, user: IUser, text = "") => {
+const updatePairChooseDayHandler = async (
+  chatId: number,
+  user: IUser,
+  text = ""
+) => {
   try {
     const matchedDay = validateDay(text);
 
@@ -48,4 +52,4 @@ const updatePairDayHandler = async (chatId: number, user: IUser, text = "") => {
   }
 };
 
-export { updatePairDayHandler };
+export { updatePairChooseDayHandler };

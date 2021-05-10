@@ -1,10 +1,13 @@
-import { successKeyboard, successText } from "./update-pair-menu.keyboard";
+import {
+  successKeyboard,
+  successText,
+} from "./update-pair-choose-menu.keyboard";
 import { TelegramAPI } from "../../../../../api";
 import { UserController } from "../../../../../db";
 import { UpdatePairSteps } from "../../../../types";
 import { errorHandler } from "../../../error";
 
-const updatePairMenuHandler = async (chatId: number) => {
+const updatePairChooseMenuHandler = async (chatId: number) => {
   try {
     await UserController.updateUser(chatId, {
       state: { state: UpdatePairSteps.day },
@@ -23,4 +26,4 @@ const updatePairMenuHandler = async (chatId: number) => {
   }
 };
 
-export { updatePairMenuHandler };
+export { updatePairChooseMenuHandler };

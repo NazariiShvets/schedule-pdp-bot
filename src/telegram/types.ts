@@ -22,6 +22,10 @@ enum CreatePairSteps {
 enum UpdatePairSteps {
   day = "update_pair_day",
   pair = "update_pair_pair",
+  updateSubject = "/update_pair_subject",
+  updateTeacher = "/update_pair_teacher",
+  updateDay = "/update_pair_day",
+  updateTime = "/update_pair_time",
 }
 
 enum DeletePairSteps {
