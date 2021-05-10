@@ -4,10 +4,10 @@ import { showPairsDayHandler } from "./showPairsDayHandler";
 import { TelegramAPI } from "../../../../api";
 import { showPairTodayMenuKeyboard } from "../../../keyboards";
 
+const days = Object.values(DAYS);
+
 const showPairsWeekHandler = async (chatId: number) => {
   try {
-    const days = Object.values(DAYS);
-
     await days.reduce(async (promise, day) => {
       await promise;
 

@@ -5,7 +5,7 @@ import {
   updatePairTimeMenuKeyboard,
 } from "../../../keyboards";
 import { IUser, PairController, UserController } from "../../../../db";
-import { createPairsText, validatePair } from "../../../../utils";
+import { createPairTextWithDay, validatePair } from "../../../../utils";
 
 const updatePairTimeHandler = async (
   chatId: number,
@@ -50,7 +50,8 @@ const updatePairTimeHandler = async (
     });
 
     await TelegramAPI.sendMessage(chatId, {
-      text: `<b><u>${user.state.day}</u></b>\n\n${createPairsText(
+      text: `${createPairTextWithDay(
+        user.state.day!,
         pairs
       )}\n\nЩо ти хочеш в ній змінити?`,
       parse_mode: "HTML",

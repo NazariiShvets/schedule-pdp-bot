@@ -19,6 +19,11 @@ enum CreatePairSteps {
   teacher = "create_pair_teacher",
 }
 
+enum UpdatePairSteps {
+  day = "update_pair_day",
+  pair = "update_pair_pair",
+}
+
 enum DeletePairSteps {
   day = "delete_pair_day",
   pair = "delete_pair_pair",
@@ -41,4 +46,11 @@ enum PAIRS_TIME {
   SIXTH = "Шоста пара",
 }
 
-export { PAIRS_TIME, DAYS, Callbacks, CreatePairSteps, DeletePairSteps };
+export {
+  PAIRS_TIME,
+  DAYS,
+  Callbacks,
+  CreatePairSteps,
+  UpdatePairSteps,
+  DeletePairSteps,
+};

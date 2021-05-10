@@ -1,7 +1,12 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
 import { TelegramAPI, TelegramBody } from "../api";
 import { db, UserController } from "../db";
-import { Callbacks, CreatePairSteps, DeletePairSteps } from "./types";
+import {
+  Callbacks,
+  CreatePairSteps,
+  DeletePairSteps,
+  UpdatePairSteps,
+} from "./types";
 import { backToMainMenuButton } from "./keyboards";
 import {
   createPairDayHandler,
@@ -20,6 +25,9 @@ import {
   deletePairMenuHandler,
   deletePairTimeHandler,
   deletePairDayHandler,
+  updatePairMenuHandler,
+  updatePairDayHandler,
+  updatePairTimeHandler,
 } from "./handlers";
 import { deletePairConfirmHandler } from "./handlers/pair/delete/deletePairConfirmHandler";
 
@@ -83,6 +91,16 @@ const webhook = async (event: APIGatewayProxyEvent) => {
 
           case DeletePairSteps.pair: {
             await deletePairTimeHandler(from.id, user, text);
+            break;
+          }
+
+          case UpdatePairSteps.day: {
+            await updatePairDayHandler(from.id, user, text);
+            break;
+          }
+
+          case UpdatePairSteps.pair: {
+            await updatePairTimeHandler(from.id, user, text);
             break;
           }
 
@@ -152,6 +170,12 @@ const webhook = async (event: APIGatewayProxyEvent) => {
 
             case Callbacks.deletePairConfirm: {
               await deletePairConfirmHandler(from.id, user);
+
+              break;
+            }
+
+            case Callbacks.updatePair: {
+              await updatePairMenuHandler(from.id);
 
               break;
             }

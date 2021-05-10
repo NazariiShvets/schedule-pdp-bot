@@ -6,7 +6,7 @@ import {
   emptyPairListKeyboard,
 } from "../../../keyboards";
 import { IUser, PairController, UserController } from "../../../../db";
-import { PAIRS_TIME } from "../../../types";
+import { createPairTextWithDay, validatePair } from "../../../../utils";
 
 const deletePairTimeHandler = async (
   chatId: number,
@@ -14,9 +14,7 @@ const deletePairTimeHandler = async (
   text = ""
 ) => {
   try {
-    const matchedPair = Object.values(PAIRS_TIME).find(
-      (pair) => pair.toLowerCase() === text.toLowerCase()
-    );
+    const matchedPair = validatePair(text);
 
     if (matchedPair) {
       const pairs = await PairController.getAllPairs({
@@ -41,12 +39,10 @@ const deletePairTimeHandler = async (
       });
 
       await TelegramAPI.sendMessage(chatId, {
-        text: `<b><u>${user.state.day}</u></b>\n\n${pairs
-          .map(
-            (pair) =>
-              `<b>Час</b>: <i>${pair.time}</i>\n<b>Предмет</b>: <i>${pair.subject}</i>\n<b>Викладач</b>: <i>${pair.teacher}</i>\n`
-          )
-          .join("\n")}\n\nТи дійсно хочеш її видалити?`,
+        text: `${createPairTextWithDay(
+          user.state.day!,
+          pairs
+        )}\n\nТи дійсно хочеш її видалити?`,
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: confirmDeletePairKeyboard,

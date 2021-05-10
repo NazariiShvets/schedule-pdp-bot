@@ -5,13 +5,12 @@ import {
   createPairTimeKeyboard,
 } from "../../../keyboards";
 import { IUser, UserController } from "../../../../db";
-import { DAYS, DeletePairSteps } from "../../../types";
+import { DeletePairSteps } from "../../../types";
+import { validateDay } from "../../../../utils";
 
 const deletePairDayHandler = async (chatId: number, user: IUser, text = "") => {
   try {
-    const matchedDay = Object.values(DAYS).find(
-      (day) => day.toLowerCase() === text.toLowerCase()
-    );
+    const matchedDay = validateDay(text);
 
     if (matchedDay) {
       await UserController.updateUser(user.telegramId, {

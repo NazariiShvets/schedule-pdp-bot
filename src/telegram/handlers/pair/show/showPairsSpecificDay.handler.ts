@@ -1,14 +1,12 @@
 import { defaultHandler } from "../../default.handler";
 import { TelegramAPI } from "../../../../api";
 import { showPairDayMenuKeyboard } from "../../../keyboards";
-import { DAYS } from "../../../types";
 import { showPairsDayHandler } from "./showPairsDayHandler";
+import { validateDay } from "../../../../utils";
 
 const showPairsSpecificDayHandler = async (chatId: number, text = "") => {
   try {
-    const matchedDay = Object.values(DAYS).find(
-      (day) => day.toLowerCase() === text.toLowerCase()
-    );
+    const matchedDay = validateDay(text);
 
     if (!matchedDay) {
       await TelegramAPI.sendMessage(chatId, {

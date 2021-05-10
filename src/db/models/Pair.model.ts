@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { db } from "../db";
+import { PAIRS_TIME } from "../../telegram/types";
 
 interface IPair {
   id?: number;
@@ -7,7 +8,7 @@ interface IPair {
   teacher: string;
   classroom?: string;
   day: string;
-  time: string;
+  time: PAIRS_TIME;
   type?: string;
   isOnline?: boolean;
   user_id: number;

@@ -5,7 +5,8 @@ import {
   backToMainMenuButton,
 } from "../../../keyboards";
 import { IUser, UserController } from "../../../../db";
-import { CreatePairSteps, PAIRS_TIME } from "../../../types";
+import { CreatePairSteps } from "../../../types";
+import { validatePair } from "../../../../utils";
 
 const createPairTimeHandler = async (
   chatId: number,
@@ -13,9 +14,7 @@ const createPairTimeHandler = async (
   text = ""
 ) => {
   try {
-    const matchedPair = Object.values(PAIRS_TIME).find(
-      (pair) => pair.toLowerCase() === text.toLowerCase()
-    );
+    const matchedPair = validatePair(text);
 
     if (matchedPair) {
       await UserController.updateUser(user.telegramId, {
