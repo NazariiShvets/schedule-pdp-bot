@@ -1,4 +1,4 @@
-import { allPairDayKeyboard, InvalidText } from "../../../../keyboards";
+import { allPairDayKeyboard, InvalidText } from "../../../shared";
 
 const invalidText = InvalidText.day;
 const invalidKeyboard = allPairDayKeyboard;

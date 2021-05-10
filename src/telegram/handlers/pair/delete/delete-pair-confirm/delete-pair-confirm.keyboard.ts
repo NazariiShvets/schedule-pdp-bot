@@ -1,4 +1,4 @@
-import { errorKeyboard } from "../../../../keyboards";
+import { errorKeyboard } from "../../../shared";
 
 const successText = "Успішно видалено";
 const successKeyboard = errorKeyboard;

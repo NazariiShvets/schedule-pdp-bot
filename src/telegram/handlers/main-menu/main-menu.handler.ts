@@ -1,13 +1,13 @@
 import { TelegramAPI } from "../../../api";
-import { mainMenuKeyboard, mainMenuText } from "./main-menu.keyboard";
+import { successKeyboard, successText } from "./main-menu.keyboard";
 import { errorHandler } from "../error";
 
 const mainMenuHandler = async (chatId: number) => {
   try {
     await TelegramAPI.sendMessage(chatId, {
-      text: mainMenuText,
+      text: successText,
       reply_markup: {
-        inline_keyboard: mainMenuKeyboard,
+        inline_keyboard: successKeyboard,
       },
     });
   } catch (error) {

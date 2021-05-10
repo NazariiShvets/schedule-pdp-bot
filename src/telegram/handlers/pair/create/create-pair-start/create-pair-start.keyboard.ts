@@ -1,4 +1,4 @@
-import { allPairDayKeyboard } from "../../../../keyboards";
+import { allPairDayKeyboard } from "../../../shared";
 
 const successText = "Ок, давай виберем день в який буде проходити пара)";
 const successKeyboard = allPairDayKeyboard;

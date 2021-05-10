@@ -1,8 +1,8 @@
-import { backToMainMenuButton } from "../../keyboards";
+import { errorKeyboard } from "../shared";
 
-const initialKeyboard = [[backToMainMenuButton]];
+const getSuccessText = (userName: string) =>
+  `Привіт ${userName}! Вітаю в боті розкладу занять. Щоб перейти до головного меню нажми кнопку ${errorKeyboard[0][0].text}`;
 
-const getGreetingText = (userName: string) =>
-  `Привіт ${userName}! Вітаю в боті розкладу занять. Щоб перейти до головного меню нажми кнопку ${initialKeyboard[0][0].text}`;
+const successKeyboard = errorKeyboard;
 
-export { initialKeyboard, getGreetingText };
+export { successKeyboard, getSuccessText };

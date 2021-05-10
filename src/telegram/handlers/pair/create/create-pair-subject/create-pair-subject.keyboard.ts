@@ -1,6 +1,6 @@
-import { backToMainMenuButton } from "../../../../keyboards";
+import { errorKeyboard } from "../../../shared";
 
 const successText = "Ок, тепер викладач. Як його звуть?";
-const successKeyboard = [[backToMainMenuButton]];
+const successKeyboard = errorKeyboard;
 
 export { successKeyboard, successText };

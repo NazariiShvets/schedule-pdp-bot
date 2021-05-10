@@ -1,5 +1,6 @@
-import { backToMainMenuButton } from "../../keyboards";
+import { errorKeyboard } from "../shared";
 
-const errorKeyboard = [[backToMainMenuButton]];
+const successText = "Щось пішло не так";
+const successKeyboard = errorKeyboard;
 
-export { errorKeyboard };
+export { successKeyboard, successText };

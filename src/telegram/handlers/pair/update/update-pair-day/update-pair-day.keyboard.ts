@@ -2,7 +2,7 @@ import {
   allPairDayKeyboard,
   allPairTimeKeyboard,
   InvalidText,
-} from "../../../../keyboards";
+} from "../../../shared";
 
 const successText = "Ок, тепер введи час пари";
 const successKeyboard = allPairTimeKeyboard;

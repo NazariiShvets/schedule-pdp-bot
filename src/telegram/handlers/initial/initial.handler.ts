@@ -2,7 +2,7 @@ import { UserController } from "../../../db";
 import { TelegramAPI, TelegramUser } from "../../../api";
 import { Callbacks } from "../../types";
 import { errorHandler } from "../error";
-import { initialKeyboard, getGreetingText } from "./initial.keyboard";
+import { successKeyboard, getSuccessText } from "./initial.keyboard";
 
 const initialHandler = async (
   chatId: number,
@@ -27,9 +27,9 @@ const initialHandler = async (
     }
 
     await TelegramAPI.sendMessage(chatId, {
-      text: getGreetingText(user.firstName),
+      text: getSuccessText(user.firstName),
       reply_markup: {
-        inline_keyboard: initialKeyboard,
+        inline_keyboard: successKeyboard,
       },
     });
   } catch (error) {

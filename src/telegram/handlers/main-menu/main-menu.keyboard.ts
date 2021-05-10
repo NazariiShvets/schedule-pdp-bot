@@ -27,11 +27,10 @@ const deletePairButton = {
   callback_data: Callbacks.deletePair,
 };
 
-const mainMenuText = "Ти в головному меню. Вибирай";
-
-const mainMenuKeyboard = [
+const successText = "Ти в головному меню. Вибирай";
+const successKeyboard = [
   [showScheduleButton],
   [createPairButton, updatePairButton, deletePairButton],
 ];
 
-export { mainMenuKeyboard, mainMenuText };
+export { successKeyboard, successText };

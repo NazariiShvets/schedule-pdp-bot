@@ -1,8 +1,11 @@
-import { allPairTimeKeyboard, InvalidText } from "../../../../keyboards";
-import { errorKeyboard } from "../../../error/error.keyboard";
 import { createPairTextWithDay } from "../../../../../utils";
 import { IPair } from "../../../../../db";
 import { DAYS } from "../../../../types";
+import {
+  allPairTimeKeyboard,
+  errorKeyboard,
+  InvalidText,
+} from "../../../shared";
 
 const getSuccessText = (day: DAYS, pairs: IPair[]) =>
   `${createPairTextWithDay(day, pairs)}\n\nЩо ти хочеш в ній змінити?`;

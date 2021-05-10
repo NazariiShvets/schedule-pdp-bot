@@ -1,11 +1,11 @@
 import {
   allPairTimeKeyboard,
-  backToMainMenuButton,
+  errorKeyboard,
   InvalidText,
-} from "../../../../keyboards";
+} from "../../../shared";
 
 const successText = "Ок, тепер введи предмет";
-const successKeyboard = [[backToMainMenuButton]];
+const successKeyboard = errorKeyboard;
 
 const invalidText = InvalidText.time;
 const invalidKeyboard = allPairTimeKeyboard;

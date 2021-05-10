@@ -1,17 +1,13 @@
-import { backToMainMenuButton, errorKeyboard } from "../../../../keyboards";
 import { createPairTextWithDay } from "../../../../../utils";
-import {
-  TelegramInlineKeyboardButton,
-  TelegramKeyboardMarkup,
-} from "../../../../../api";
 import { Callbacks } from "../../../../types";
+import { backToMainMenuButton, errorKeyboard } from "../../../shared";
 
-const backToShowScheduleMenu: TelegramInlineKeyboardButton = {
+const backToShowScheduleMenu = {
   text: "Повернутись до меню показу розкладу",
   callback_data: Callbacks.showSchedule,
 };
 
-const showPairTodayMenuKeyboard: TelegramKeyboardMarkup = [
+const showPairTodayMenuKeyboard = [
   [backToShowScheduleMenu],
   [backToMainMenuButton],
 ];

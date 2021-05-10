@@ -1,6 +1,6 @@
-import { backToMainMenuButton } from "../../../../keyboards";
 import { TelegramInlineKeyboardButton } from "../../../../../api";
 import { Callbacks } from "../../../../types";
+import { backToMainMenuButton } from "../../../shared";
 
 const showScheduleTodayButton: TelegramInlineKeyboardButton = {
   text: "На сьогодні",

@@ -1,8 +1,7 @@
-import { backToMainMenuButton } from "../../../../keyboards";
-import { TelegramInlineKeyboardButton } from "../../../../../api";
 import { Callbacks } from "../../../../types";
+import { backToMainMenuButton } from "../../../shared";
 
-const backToShowScheduleMenu: TelegramInlineKeyboardButton = {
+const backToShowScheduleMenu = {
   text: "Повернутись до меню показу розкладу",
   callback_data: Callbacks.showSchedule,
 };

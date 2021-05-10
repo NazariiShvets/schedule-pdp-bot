@@ -1,12 +1,12 @@
 import { TelegramAPI } from "../../../api";
-import { errorKeyboard } from "./error.keyboard";
+import { successKeyboard, successText } from "./error.keyboard";
 
 const errorHandler = async (chatId: number) => {
   try {
     await TelegramAPI.sendMessage(chatId, {
-      text: "Щось пішло не так",
+      text: successText,
       reply_markup: {
-        inline_keyboard: errorKeyboard,
+        inline_keyboard: successKeyboard,
       },
     });
   } catch (error) {
