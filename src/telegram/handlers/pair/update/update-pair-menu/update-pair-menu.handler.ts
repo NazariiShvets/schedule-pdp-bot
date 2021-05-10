@@ -1,8 +1,8 @@
-import { TelegramAPI } from "../../../../api";
-import { updatePairDayMenuKeyboard } from "../../../keyboards";
-import { UserController } from "../../../../db";
-import { UpdatePairSteps } from "../../../types";
-import { errorHandler } from "../../error";
+import { successKeyboard, successText } from "./update-pair-menu.keyboard";
+import { TelegramAPI } from "../../../../../api";
+import { UserController } from "../../../../../db";
+import { UpdatePairSteps } from "../../../../types";
+import { errorHandler } from "../../../error";
 
 const updatePairMenuHandler = async (chatId: number) => {
   try {
@@ -11,9 +11,9 @@ const updatePairMenuHandler = async (chatId: number) => {
     });
 
     await TelegramAPI.sendMessage(chatId, {
-      text: "Ок, давай виберем день в який проходить пара пара)",
+      text: successText,
       reply_markup: {
-        keyboard: updatePairDayMenuKeyboard,
+        keyboard: successKeyboard,
         one_time_keyboard: true,
         resize_keyboard: true,
       },

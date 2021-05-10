@@ -1,6 +1,6 @@
-import { allPairDayKeyboard } from "../../../../keyboards";
+import { allPairDayKeyboard, InvalidText } from "../../../../keyboards";
 
-const invalidText = "Введений день невалідний. Введи валідний день";
+const invalidText = InvalidText.day;
 const invalidKeyboard = allPairDayKeyboard;
 
 export { invalidText, invalidKeyboard };

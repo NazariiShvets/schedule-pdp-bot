@@ -1,11 +1,15 @@
-import { TelegramAPI } from "../../../../api";
 import {
-  backToMainMenuButton,
-  updatePairTimeMenuKeyboard,
-} from "../../../keyboards";
-import { IUser, PairController, UserController } from "../../../../db";
-import { createPairTextWithDay, validatePair } from "../../../../utils";
-import { errorHandler } from "../../error";
+  emptyKeyboard,
+  emptyText,
+  invalidKeyboard,
+  invalidText,
+  successKeyboard,
+  getSuccessText,
+} from "./update-pair-time.keyboard";
+import { validatePair } from "../../../../../utils";
+import { IUser, PairController, UserController } from "../../../../../db";
+import { TelegramAPI } from "../../../../../api";
+import { errorHandler } from "../../../error";
 
 const updatePairTimeHandler = async (
   chatId: number,
@@ -15,11 +19,11 @@ const updatePairTimeHandler = async (
   try {
     const matchedPair = validatePair(text);
 
-    if (matchedPair) {
+    if (!matchedPair) {
       await TelegramAPI.sendMessage(chatId, {
-        text: "Введений час невалідний. Введи валідний час",
+        text: invalidText,
         reply_markup: {
-          keyboard: updatePairTimeMenuKeyboard,
+          keyboard: invalidKeyboard,
           one_time_keyboard: true,
           resize_keyboard: true,
         },
@@ -36,9 +40,9 @@ const updatePairTimeHandler = async (
 
     if (!pairs?.length) {
       await TelegramAPI.sendMessage(chatId, {
-        text: `Список пар пустий`,
+        text: emptyText,
         reply_markup: {
-          inline_keyboard: [[backToMainMenuButton]],
+          inline_keyboard: emptyKeyboard,
         },
       });
 
@@ -50,13 +54,10 @@ const updatePairTimeHandler = async (
     });
 
     await TelegramAPI.sendMessage(chatId, {
-      text: `${createPairTextWithDay(
-        user.state.day!,
-        pairs
-      )}\n\nЩо ти хочеш в ній змінити?`,
+      text: getSuccessText(user.state.day!, pairs),
       parse_mode: "HTML",
       reply_markup: {
-        inline_keyboard: [[backToMainMenuButton]],
+        inline_keyboard: successKeyboard,
       },
     });
   } catch (error) {
