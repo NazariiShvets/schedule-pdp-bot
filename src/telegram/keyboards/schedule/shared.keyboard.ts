@@ -2,6 +2,10 @@ import { TelegramKeyboardButton } from "../../../api";
 import { DAYS, PAIRS_TIME } from "../../types";
 import { backToMainMenuButton } from "../shared.button";
 
+enum InvalidText {
+  day = "Введений день невалідний. Введи валідний день",
+}
+
 const mondayButton: TelegramKeyboardButton = { text: DAYS.MONDAY };
 const tuesdayButton: TelegramKeyboardButton = { text: DAYS.TUESDAY };
 const wednesdayButton: TelegramKeyboardButton = { text: DAYS.WEDNESDAY };
@@ -47,4 +51,5 @@ export {
   sixthPairTimeButton,
   allPairDayKeyboard,
   allPairTimeKeyboard,
+  InvalidText,
 };

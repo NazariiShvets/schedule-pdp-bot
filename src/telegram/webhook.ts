@@ -14,7 +14,7 @@ import {
   createPairSubjectHandler,
   createPairTeacherHandler,
   createPairTimeHandler,
-  defaultHandler,
+  errorHandler,
   initialHandler,
   mainMenuHandler,
   showPairMenuHandler,
@@ -105,7 +105,7 @@ const webhook = async (event: APIGatewayProxyEvent) => {
           }
 
           default: {
-            await defaultHandler(from.id);
+            await errorHandler(from.id);
           }
         }
       }
@@ -181,14 +181,14 @@ const webhook = async (event: APIGatewayProxyEvent) => {
             }
 
             default: {
-              await defaultHandler(from.id);
+              await errorHandler(from.id);
             }
           }
 
           return;
         }
 
-        await defaultHandler(from.id);
+        await errorHandler(from.id);
       }
     }
   } catch (error) {

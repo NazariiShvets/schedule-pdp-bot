@@ -1,8 +1,8 @@
-import { defaultHandler } from "../../default.handler";
-import { TelegramAPI } from "../../../../api";
-import { IUser, UserController } from "../../../../db";
-import { CreatePairSteps } from "../../../types";
-import { backToMainMenuButton } from "../../../keyboards";
+import { TelegramAPI } from "../../../../../api";
+import { errorHandler } from "../../../error";
+import { CreatePairSteps } from "../../../../types";
+import { IUser, UserController } from "../../../../../db";
+import { successKeyboard, successText } from "./create-pair-subject.keyboard";
 
 const createPairSubjectHandler = async (
   chatId: number,
@@ -19,15 +19,15 @@ const createPairSubjectHandler = async (
     });
 
     await TelegramAPI.sendMessage(chatId, {
-      text: "Ок, тепер викладач. Як його звуть?",
+      text: successText,
       reply_markup: {
-        keyboard: [[backToMainMenuButton]],
+        keyboard: successKeyboard,
         one_time_keyboard: true,
         resize_keyboard: true,
       },
     });
   } catch (error) {
-    await defaultHandler(chatId);
+    await errorHandler(chatId);
   }
 };
 

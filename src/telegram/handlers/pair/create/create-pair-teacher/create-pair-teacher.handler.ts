@@ -1,8 +1,8 @@
-import { defaultHandler } from "../../default.handler";
-import { TelegramAPI } from "../../../../api";
-import { IUser, PairController, UserController } from "../../../../db";
-import { Callbacks } from "../../../types";
-import { backToMainMenuButton } from "../../../keyboards";
+import { IUser, PairController, UserController } from "../../../../../db";
+import { Callbacks } from "../../../../types";
+import { TelegramAPI } from "../../../../../api";
+import { errorHandler } from "../../../error";
+import { successKeyboard, successText } from "./create-pair-teacher.keyboard";
 
 const createPairTeacherHandler = async (
   chatId: number,
@@ -25,13 +25,13 @@ const createPairTeacherHandler = async (
     });
 
     await TelegramAPI.sendMessage(chatId, {
-      text: "Круто! Я буду надсилати тобі сповіщення за 5 хв до початку пари)",
+      text: successText,
       reply_markup: {
-        inline_keyboard: [[backToMainMenuButton]],
+        inline_keyboard: successKeyboard,
       },
     });
   } catch (error) {
-    await defaultHandler(chatId);
+    await errorHandler(chatId);
   }
 };
 

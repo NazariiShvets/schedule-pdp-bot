@@ -1,7 +1,7 @@
-import { TelegramAPI } from "../../api";
-import { errorKeyboard } from "../keyboards";
+import { TelegramAPI } from "../../../api";
+import { errorKeyboard } from "./error.keyboard";
 
-const defaultHandler = async (chatId: number) => {
+const errorHandler = async (chatId: number) => {
   try {
     await TelegramAPI.sendMessage(chatId, {
       text: "Щось пішло не так",
@@ -14,4 +14,4 @@ const defaultHandler = async (chatId: number) => {
   }
 };
 
-export { defaultHandler };
+export { errorHandler };
