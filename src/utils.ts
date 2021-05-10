@@ -22,7 +22,7 @@ const pairTimes = {
 };
 
 const createPairText = (pair: IPair) =>
-  `<b>Час</b>: <i>${pair.time} ${
+  `<b>Час</b>: <i>${pair.time}, ${
     pairTimes[pair.time]
   }</i>\n<b>Предмет</b>: <i>${pair.subject}</i>\n<b>Викладач</b>: <i>${
     pair.teacher

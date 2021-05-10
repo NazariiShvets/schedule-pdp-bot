@@ -1,9 +1,13 @@
-import { defaultHandler } from "../../default.handler";
-import { TelegramAPI } from "../../../../api";
-import { errorKeyboard, showPairTodayMenuKeyboard } from "../../../keyboards";
-import { PairController } from "../../../../db";
-import { DAYS } from "../../../types";
-import { createPairTextWithDay } from "../../../../utils";
+import { PairController } from "../../../../../db";
+import { TelegramAPI } from "../../../../../api";
+import { errorHandler } from "../../../error";
+import { DAYS } from "../../../../types";
+import {
+  emptyKeyboard,
+  emptyText,
+  getSuccessText,
+  successKeyboard,
+} from "./show-pair-day.keyboard";
 
 const today = Object.values(DAYS)[new Date().getDay()];
 
@@ -22,17 +26,17 @@ const showPairsDayHandler = async (
 
     const replyMarkup = options?.withoutKeyboard
       ? {
-          keyboard: errorKeyboard,
+          keyboard: emptyKeyboard,
           resize_keyboard: true,
           one_time_keyboard: true,
         }
       : {
-          inline_keyboard: showPairTodayMenuKeyboard,
+          inline_keyboard: successKeyboard,
         };
 
     if (!pairs?.length) {
       await TelegramAPI.sendMessage(chatId, {
-        text: `Список пар пустий`,
+        text: emptyText,
         reply_markup: replyMarkup,
       });
 
@@ -40,12 +44,12 @@ const showPairsDayHandler = async (
     }
 
     await TelegramAPI.sendMessage(chatId, {
-      text: createPairTextWithDay(day, pairs),
+      text: getSuccessText(day, pairs),
       parse_mode: "HTML",
       reply_markup: replyMarkup,
     });
   } catch (error) {
-    await defaultHandler(chatId);
+    await errorHandler(chatId);
   }
 };
 

@@ -1,4 +1,3 @@
-import { defaultHandler } from "../../default.handler";
 import { TelegramAPI } from "../../../../api";
 import {
   updatePairDayMenuKeyboard,
@@ -7,6 +6,7 @@ import {
 import { IUser, UserController } from "../../../../db";
 import { UpdatePairSteps } from "../../../types";
 import { validateDay } from "../../../../utils";
+import { errorHandler } from "../../error";
 
 const updatePairDayHandler = async (chatId: number, user: IUser, text = "") => {
   try {
@@ -42,7 +42,7 @@ const updatePairDayHandler = async (chatId: number, user: IUser, text = "") => {
       },
     });
   } catch (error) {
-    await defaultHandler(chatId);
+    await errorHandler(chatId);
   }
 };
 

@@ -1,8 +1,8 @@
-import { defaultHandler } from "../../default.handler";
 import { TelegramAPI } from "../../../../api";
 import { updatePairDayMenuKeyboard } from "../../../keyboards";
 import { UserController } from "../../../../db";
 import { UpdatePairSteps } from "../../../types";
+import { errorHandler } from "../../error";
 
 const updatePairMenuHandler = async (chatId: number) => {
   try {
@@ -19,7 +19,7 @@ const updatePairMenuHandler = async (chatId: number) => {
       },
     });
   } catch (error) {
-    await defaultHandler(chatId);
+    await errorHandler(chatId);
   }
 };
 

@@ -1,8 +1,8 @@
-import { defaultHandler } from "../../default.handler";
-import { TelegramAPI } from "../../../../api";
-import { showPairDayMenuKeyboard } from "../../../keyboards";
-import { UserController } from "../../../../db";
-import { Callbacks } from "../../../types";
+import { UserController } from "../../../../../db";
+import { Callbacks } from "../../../../types";
+import { TelegramAPI } from "../../../../../api";
+import { errorHandler } from "../../../error";
+import { successKeyboard, successText } from "./show-pair-choose-day.keyboard";
 
 const showPairsChooseDayHandler = async (chatId: number) => {
   try {
@@ -11,15 +11,15 @@ const showPairsChooseDayHandler = async (chatId: number) => {
     });
 
     await TelegramAPI.sendMessage(chatId, {
-      text: "Вибери день",
+      text: successText,
       reply_markup: {
-        keyboard: showPairDayMenuKeyboard,
+        keyboard: successKeyboard,
         resize_keyboard: true,
         one_time_keyboard: true,
       },
     });
   } catch (error) {
-    await defaultHandler(chatId);
+    await errorHandler(chatId);
   }
 };
 

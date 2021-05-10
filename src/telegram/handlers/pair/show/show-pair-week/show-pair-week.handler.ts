@@ -1,8 +1,8 @@
-import { defaultHandler } from "../../default.handler";
-import { DAYS } from "../../../types";
-import { showPairsDayHandler } from "./showPairsDayHandler";
-import { TelegramAPI } from "../../../../api";
-import { showPairTodayMenuKeyboard } from "../../../keyboards";
+import { TelegramAPI } from "../../../../../api";
+import { showPairsDayHandler } from "../show-pair-day";
+import { errorHandler } from "../../../error";
+import { DAYS } from "../../../../types";
+import { successKeyboard, successText } from "./show-pair-week.keyboard";
 
 const days = Object.values(DAYS);
 
@@ -15,13 +15,13 @@ const showPairsWeekHandler = async (chatId: number) => {
     }, Promise.resolve());
 
     await TelegramAPI.sendMessage(chatId, {
-      text: "Хочеш повернутись назад?",
+      text: successText,
       reply_markup: {
-        inline_keyboard: showPairTodayMenuKeyboard,
+        inline_keyboard: successKeyboard,
       },
     });
   } catch (error) {
-    await defaultHandler(chatId);
+    await errorHandler(chatId);
   }
 };
 
