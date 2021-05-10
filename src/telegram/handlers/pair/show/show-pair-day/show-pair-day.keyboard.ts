@@ -1,5 +1,5 @@
 import { createPairTextWithDay } from "../../../../../utils";
-import { Callbacks } from "../../../../types";
+import { Callbacks, DAYS } from "../../../../types";
 import { backToMainMenuButton, errorKeyboard } from "../../../shared";
 
 const backToShowScheduleMenu = {
@@ -15,7 +15,7 @@ const showPairTodayMenuKeyboard = [
 const getSuccessText = createPairTextWithDay;
 const successKeyboard = showPairTodayMenuKeyboard;
 
-const emptyText = `Список пар пустий`;
+const emptyText = (day: DAYS) => `<b><u>${day}</u></b>\n\nСписок пар пустий`;
 const emptyKeyboard = errorKeyboard;
 
 export { successKeyboard, getSuccessText, emptyText, emptyKeyboard };

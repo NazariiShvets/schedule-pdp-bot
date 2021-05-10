@@ -36,7 +36,8 @@ const showPairsDayHandler = async (
 
     if (!pairs?.length) {
       await TelegramAPI.sendMessage(chatId, {
-        text: emptyText,
+        text: emptyText(day),
+        parse_mode: "HTML",
         reply_markup: replyMarkup,
       });
 
@@ -49,6 +50,7 @@ const showPairsDayHandler = async (
       reply_markup: replyMarkup,
     });
   } catch (error) {
+    console.error(error);
     await errorHandler(chatId);
   }
 };

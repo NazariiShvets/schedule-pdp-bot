@@ -1,16 +1,15 @@
-import { IUser, UserController } from "../../../../../db";
+import { IUser, PairController } from "../../../../../db";
 import { validatePair } from "../../../../../utils";
-import { CreatePairSteps } from "../../../../types";
 import { TelegramAPI } from "../../../../../api";
 import { errorHandler } from "../../../error";
 import {
-  invalidKeyboard,
-  invalidText,
+  invalidPairTimeKeyboard,
+  invalidPairTimeText,
   successKeyboard,
   successText,
-} from "./create-pair-time.keyboard";
+} from "./update-pair.keyboard";
 
-const createPairTimeHandler = async (
+const updatePairTimeHandler = async (
   chatId: number,
   user: IUser,
   text = ""
@@ -20,9 +19,9 @@ const createPairTimeHandler = async (
 
     if (!matchedPair) {
       await TelegramAPI.sendMessage(chatId, {
-        text: invalidText,
+        text: invalidPairTimeText,
         reply_markup: {
-          keyboard: invalidKeyboard,
+          keyboard: invalidPairTimeKeyboard,
           one_time_keyboard: true,
           resize_keyboard: true,
         },
@@ -31,20 +30,21 @@ const createPairTimeHandler = async (
       return;
     }
 
-    await UserController.updateUser(user.telegramId, {
-      state: {
-        ...user.state,
-        state: CreatePairSteps.subject,
-        pair: matchedPair,
+    await PairController.updatePair(
+      {
+        user_id: chatId,
+        day: user.state.day,
+        time: user.state.pair,
       },
-    });
+      {
+        time: matchedPair,
+      }
+    );
 
     await TelegramAPI.sendMessage(chatId, {
       text: successText,
       reply_markup: {
-        keyboard: successKeyboard,
-        resize_keyboard: true,
-        one_time_keyboard: true,
+        inline_keyboard: successKeyboard,
       },
     });
   } catch (error) {
@@ -53,4 +53,4 @@ const createPairTimeHandler = async (
   }
 };
 
-export { createPairTimeHandler };
+export { updatePairTimeHandler };

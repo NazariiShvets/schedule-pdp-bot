@@ -40,18 +40,16 @@ class PairController {
   };
 
   static updatePair = async (
-    id: number,
+    id: number | Partial<IPair>,
     updateData: Partial<IPair>
-  ): Promise<IPair | null> => {
-    try {
-      const updatedPair = await Pair.update(updateData, { where: { id } });
+  ) => {
+    const filter = typeof id !== "object" ? { id } : id;
 
-      return (updatedPair[1] as any).dataValues as IPair;
-    } catch (error) {
-      console.log(error);
+    const updatedPair = await Pair.update(updateData, { where: filter });
 
-      return null;
-    }
+    const pairs = await PairController.getAllPairs(filter);
+
+    console.log(updatedPair, pairs, filter, updateData);
   };
 
   static deletePair = async (

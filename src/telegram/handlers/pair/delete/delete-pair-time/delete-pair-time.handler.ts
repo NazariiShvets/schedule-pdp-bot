@@ -61,6 +61,7 @@ const deletePairTimeHandler = async (
       },
     });
   } catch (error) {
+    console.error(error);
     await errorHandler(chatId);
   }
 };

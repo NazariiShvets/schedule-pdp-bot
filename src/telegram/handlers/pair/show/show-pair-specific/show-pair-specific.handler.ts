@@ -24,6 +24,7 @@ const showPairsSpecificDayHandler = async (chatId: number, text = "") => {
 
     await showPairsDayHandler(chatId, matchedDay);
   } catch (error) {
+    console.error(error);
     await errorHandler(chatId);
   }
 };

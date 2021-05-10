@@ -31,6 +31,7 @@ const createPairTeacherHandler = async (
       },
     });
   } catch (error) {
+    console.error(error);
     await errorHandler(chatId);
   }
 };

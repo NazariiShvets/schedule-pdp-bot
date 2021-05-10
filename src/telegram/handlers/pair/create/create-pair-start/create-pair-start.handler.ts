@@ -19,6 +19,7 @@ const createPairStartHandler = async (chatId: number, user: IUser) => {
       },
     });
   } catch (error) {
+    console.error(error);
     await errorHandler(chatId);
   }
 };

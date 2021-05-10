@@ -1,6 +1,6 @@
 import { createPairTextWithDay } from "../../../../../utils";
 import { IPair } from "../../../../../db";
-import { DAYS, UpdatePairSteps } from "../../../../types";
+import { Callbacks, DAYS } from "../../../../types";
 import {
   allPairTimeKeyboard,
   errorKeyboard,
@@ -17,19 +17,19 @@ enum Text {
 
 const updateDayButton: TelegramInlineKeyboardButton = {
   text: Text.updateDay,
-  callback_data: UpdatePairSteps.updateDay,
+  callback_data: Callbacks.updatePairDay,
 };
 const updateTimeButton: TelegramInlineKeyboardButton = {
   text: Text.updateTime,
-  callback_data: UpdatePairSteps.updateTime,
+  callback_data: Callbacks.updatePairTime,
 };
 const updateTeacherButton: TelegramInlineKeyboardButton = {
   text: Text.updateTeacher,
-  callback_data: UpdatePairSteps.updateTeacher,
+  callback_data: Callbacks.updatePairTeacher,
 };
 const updateSubjectButton: TelegramInlineKeyboardButton = {
   text: Text.updateSubject,
-  callback_data: UpdatePairSteps.updateSubject,
+  callback_data: Callbacks.updatePairSubject,
 };
 
 const getSuccessText = (day: DAYS, pairs: IPair[]) =>

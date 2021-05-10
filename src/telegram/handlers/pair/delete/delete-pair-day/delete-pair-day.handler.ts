@@ -44,6 +44,7 @@ const deletePairDayHandler = async (chatId: number, user: IUser, text = "") => {
       },
     });
   } catch (error) {
+    console.error(error);
     await errorHandler(chatId);
   }
 };

@@ -19,6 +19,7 @@ const showPairsChooseDayHandler = async (chatId: number) => {
       },
     });
   } catch (error) {
+    console.error(error);
     await errorHandler(chatId);
   }
 };

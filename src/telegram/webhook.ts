@@ -28,6 +28,14 @@ import {
   updatePairChooseMenuHandler,
   updatePairChooseDayHandler,
   updatePairChooseTimeHandler,
+  updatePairDayHandler,
+  updatePairTimeHandler,
+  updatePairTeacherHandler,
+  updatePairSubjectHandler,
+  updatePairChooseOptionDayHandler,
+  updatePairChooseOptionSubjectHandler,
+  updatePairChooseOptionTeacherHandler,
+  updatePairChooseOptionTimeHandler,
   backToMainMenuButton,
 } from "./handlers";
 
@@ -104,6 +112,30 @@ const webhook = async (event: APIGatewayProxyEvent) => {
             break;
           }
 
+          case Callbacks.updatePairDay: {
+            await updatePairDayHandler(from.id, user, text);
+
+            break;
+          }
+
+          case Callbacks.updatePairTime: {
+            await updatePairTimeHandler(from.id, user, text);
+
+            break;
+          }
+
+          case Callbacks.updatePairTeacher: {
+            await updatePairTeacherHandler(from.id, user, text);
+
+            break;
+          }
+
+          case Callbacks.updatePairSubject: {
+            await updatePairSubjectHandler(from.id, user, text);
+
+            break;
+          }
+
           default: {
             await errorHandler(from.id);
           }
@@ -176,6 +208,30 @@ const webhook = async (event: APIGatewayProxyEvent) => {
 
             case Callbacks.updatePair: {
               await updatePairChooseMenuHandler(from.id);
+
+              break;
+            }
+
+            case Callbacks.updatePairDay: {
+              await updatePairChooseOptionDayHandler(from.id, user);
+
+              break;
+            }
+
+            case Callbacks.updatePairTime: {
+              await updatePairChooseOptionTimeHandler(from.id, user);
+
+              break;
+            }
+
+            case Callbacks.updatePairTeacher: {
+              await updatePairChooseOptionTeacherHandler(from.id, user);
+
+              break;
+            }
+
+            case Callbacks.updatePairSubject: {
+              await updatePairChooseOptionSubjectHandler(from.id, user);
 
               break;
             }
