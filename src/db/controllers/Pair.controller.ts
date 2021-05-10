@@ -45,11 +45,7 @@ class PairController {
   ) => {
     const filter = typeof id !== "object" ? { id } : id;
 
-    const updatedPair = await Pair.update(updateData, { where: filter });
-
-    const pairs = await PairController.getAllPairs(filter);
-
-    console.log(updatedPair, pairs, filter, updateData);
+    await Pair.update(updateData, { where: filter });
   };
 
   static deletePair = async (
