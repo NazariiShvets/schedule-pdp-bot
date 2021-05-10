@@ -1,3 +1,4 @@
-export * from "./deletePairMenuHandler";
-export * from "./deletePairDayHandler";
-export * from "./deletePairTimeHandler";
+export * from "./delete-pair-confirm";
+export * from "./delete-pair-day";
+export * from "./delete-pair-menu";
+export * from "./delete-pair-time";

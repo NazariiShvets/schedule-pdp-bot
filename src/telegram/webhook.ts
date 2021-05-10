@@ -29,7 +29,7 @@ import {
   updatePairDayHandler,
   updatePairTimeHandler,
 } from "./handlers";
-import { deletePairConfirmHandler } from "./handlers/pair/delete/deletePairConfirmHandler";
+import { deletePairConfirmHandler } from "./handlers/pair/delete/deletePairTimeHandler";
 
 const webhook = async (event: APIGatewayProxyEvent) => {
   try {

@@ -1,8 +1,8 @@
-import { defaultHandler } from "../../default.handler";
-import { IUser, PairController, UserController } from "../../../../db";
-import { Callbacks } from "../../../types";
-import { TelegramAPI } from "../../../../api";
-import { errorKeyboard } from "../../../keyboards";
+import { IUser, PairController, UserController } from "../../../../../db";
+import { TelegramAPI } from "../../../../../api";
+import { Callbacks } from "../../../../types";
+import { successKeyboard, successText } from "./delete-pair-confirm.keyboard";
+import { errorHandler } from "../../../error";
 
 const deletePairConfirmHandler = async (chatId: number, user: IUser) => {
   try {
@@ -17,13 +17,13 @@ const deletePairConfirmHandler = async (chatId: number, user: IUser) => {
     });
 
     await TelegramAPI.sendMessage(chatId, {
-      text: "Успішно видалено",
+      text: successText,
       reply_markup: {
-        inline_keyboard: errorKeyboard,
+        inline_keyboard: successKeyboard,
       },
     });
   } catch (error) {
-    await defaultHandler(chatId);
+    await errorHandler(chatId);
   }
 };
 

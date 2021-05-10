@@ -1,16 +1,16 @@
-import { TelegramAPI } from "../../../../../api";
-import { IUser, UserController } from "../../../../../db";
-import { CreatePairSteps } from "../../../../types";
-import { validateDay } from "../../../../../utils";
-import { errorHandler } from "../../../error";
 import {
-  successKeyboard,
   invalidKeyboard,
-  successText,
   invalidText,
-} from "./create-pair-day.keyboard";
+  successKeyboard,
+  successText,
+} from "./delete-pair-day.keyboard";
+import { TelegramAPI } from "../../../../../api";
+import { errorHandler } from "../../../error";
+import { DeletePairSteps } from "../../../../types";
+import { IUser, UserController } from "../../../../../db";
+import { validateDay } from "../../../../../utils";
 
-const createPairDayHandler = async (chatId: number, user: IUser, text = "") => {
+const deletePairDayHandler = async (chatId: number, user: IUser, text = "") => {
   try {
     const matchedDay = validateDay(text);
 
@@ -30,7 +30,7 @@ const createPairDayHandler = async (chatId: number, user: IUser, text = "") => {
     await UserController.updateUser(user.telegramId, {
       state: {
         ...user.state,
-        state: CreatePairSteps.pair,
+        state: DeletePairSteps.pair,
         day: matchedDay,
       },
     });
@@ -48,4 +48,4 @@ const createPairDayHandler = async (chatId: number, user: IUser, text = "") => {
   }
 };
 
-export { createPairDayHandler };
+export { deletePairDayHandler };

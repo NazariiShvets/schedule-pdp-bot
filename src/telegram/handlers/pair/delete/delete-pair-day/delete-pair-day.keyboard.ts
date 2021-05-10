@@ -1,13 +1,13 @@
 import {
   allPairDayKeyboard,
-  allPairTimeKeyboard,
+  errorKeyboard,
   InvalidText,
 } from "../../../../keyboards";
 
 const successText = "Ок, тепер введи час пари";
-const successKeyboard = allPairTimeKeyboard;
+const successKeyboard = errorKeyboard;
 
 const invalidText = InvalidText.day;
 const invalidKeyboard = allPairDayKeyboard;
 
-export { invalidKeyboard, successKeyboard, successText, invalidText };
+export { successKeyboard, successText, invalidKeyboard, invalidText };

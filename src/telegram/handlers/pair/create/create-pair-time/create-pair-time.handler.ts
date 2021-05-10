@@ -18,7 +18,7 @@ const createPairTimeHandler = async (
   try {
     const matchedPair = validatePair(text);
 
-    if (matchedPair) {
+    if (!matchedPair) {
       await TelegramAPI.sendMessage(chatId, {
         text: invalidText,
         reply_markup: {

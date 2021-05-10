@@ -4,6 +4,7 @@ import { backToMainMenuButton } from "../shared.button";
 
 enum InvalidText {
   day = "Введений день невалідний. Введи валідний день",
+  time = "Введений час невалідний. Введи валідний час",
 }
 
 const mondayButton: TelegramKeyboardButton = { text: DAYS.MONDAY };
