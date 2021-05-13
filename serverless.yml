@@ -1,0 +1,30 @@
+service: schedule-pdp-bot
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-dotenv-plugin
+  - serverless-offline
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-central-1
+  lambdaHashingVersion: 20201221
+  environment:
+    TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
+    DB_NAME: ${env:DB_NAME}
+    DB_USER: ${env:DB_USER}
+    DB_PASSWORD: ${env:DB_PASSWORD}
+    DB_ENDPOINT: ${env:DB_ENDPOINT}
+
+functions:
+  webhook:
+    handler: src/telegram/webhook.webhook
+    events:
+      - http:
+          path: /
+          method: post
+
+useDotenv : true
